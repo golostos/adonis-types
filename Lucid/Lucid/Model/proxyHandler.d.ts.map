@@ -1,1 +1,1 @@
-{"version":3,"file":"proxyHandler.d.ts","sourceRoot":"","sources":["../../../../node_modules/@adonisjs/lucid/src/Lucid/Model/proxyHandler.js"],"names":[],"mappings":"AAgBA;;;;;;;;GAQG;AACH,sEAYC"}
+{"version":3,"file":"proxyHandler.d.ts","sourceRoot":"","sources":["../../../../../node_modules/@adonisjs/lucid/src/Lucid/Model/proxyHandler.js"],"names":[],"mappings":"AAgBA;;;;;;;;GAQG;AACH,sEAYC"}

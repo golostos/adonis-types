@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../node_modules/@adonisjs/framework/src/Static/index.js"],"names":[],"mappings":"AAwDiB,6DAchB;;AAvDD;;;;;;;;;;;GAWG;AACH;IACE;;;;;;;;;;OAUG;IACH,oDAFY,IAAI,CAgBf;CACF"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../node_modules/@adonisjs/framework/src/Static/index.js"],"names":[],"mappings":"AAwDiB,6DAchB;;AAvDD;;;;;;;;;;;GAWG;AACH;IACE;;;;;;;;;;OAUG;IACH,oDAFY,IAAI,CAgBf;CACF"}

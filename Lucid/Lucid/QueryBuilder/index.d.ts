@@ -4,6 +4,7 @@ import type knex from '../../../knex';
 export = QueryBuilder;
 type Serializer = VanillaSerializer
 type Collection = Promise<Serializer>
+type Mixed = any
 // type Constructor<T> = { new(): T }
 // type FullQueryBuilder = knex.QueryBuilder
 
@@ -206,7 +207,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @throws {ModelNotFoundException} If unable to find first row
      */
-    firstOrFail(): Promise<Model>;
+    firstOrFail(): Promise<TModel>;
     /**
      * Paginate records, same as fetch but returns a
      * collection with pagination info
@@ -375,7 +376,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    whereHas(relation: string, callback: Function, expression: string, value: string): QueryBuilder<TModel>;
+    whereHas(relation: string, callback?: Function, expression?: string, value?: string): QueryBuilder<TModel>;
     /**
      * Same as `whereHas` but with `or` clause
      *
@@ -388,7 +389,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    orWhereHas(relation: string, callback: Function, expression: string, value: Mixed): QueryBuilder<TModel>;
+    orWhereHas(relation: string, callback?: Function, expression?: string, value?: Mixed): QueryBuilder<TModel>;
     /**
      * Opposite of `whereHas`
      *

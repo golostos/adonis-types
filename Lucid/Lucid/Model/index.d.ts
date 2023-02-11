@@ -1,12 +1,12 @@
 export = Model;
+import VanillaSerializer = require('../Serializers/Vanilla');
+import QueryBuilder = require('../QueryBuilder');
+import BaseModel from './Base';
 type Serializer = VanillaSerializer
 type Collection = Promise<Serializer>
 type Constructor<T> = { new(): T }
-type FullQueryBuilder = knex.QueryBuilder
-// interface FullQueryBuilder extends 
-//     Omit<knex.QueryBuilder, 'delete' | 'first' | 'insert' | 'truncate' | 'update' | 'with' | 'clone'>,
-//     QueryBuilder {}
-// declare class FullQueryBuilder extends QueryBuilder implements knex.QueryBuilder {}
+type Mixed = any
+
 /**
  * Lucid model is a base model and supposed to be
  * extended by other models.
@@ -133,7 +133,7 @@ declare class Model extends BaseModel {
      *
      * @return {QueryBuilder}
      */
-    static queryWithOutScopes(): QueryBuilder;
+    static queryWithOutScopes<T>(this: Constructor<T>): QueryBuilder<T>;
     /**
      * Define a query macro to be added to query builder.
      *
@@ -217,7 +217,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model|Null}
      */
-    static last(field?: string): Model | null;
+    static last<T>(this: Constructor<T>, field?: string): T | null;
     /**
      * Creates many instances of model in parallel.
      *
@@ -230,7 +230,7 @@ declare class Model extends BaseModel {
      *
      * @throws {InvalidArgumentException} If payloadArray is not an array
      */
-    static createMany(payloadArray: any[], trx?: any): Model[];
+    static createMany<T>(this: Constructor<T>, payloadArray: any[], trx?: any): T[];
     /**
      * Deletes all rows of this model (truncate table).
      *
@@ -249,7 +249,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model|Null}
      */
-    static find(value: string | number): Model | null;
+    static find<T>(this: Constructor<T>, value: string | number): T | null;
     /**
      * Find a row using the primary key or
      * fail with an exception
@@ -263,7 +263,7 @@ declare class Model extends BaseModel {
      *
      * @throws {ModelNotFoundException} If unable to find row
      */
-    static findOrFail(value: string | number): Model;
+    static findOrFail<T>(this: Constructor<T>, value: string | number): T;
     /**
      * Find a model instance using key/value pair
      *
@@ -275,7 +275,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model|Null}
      */
-    static findBy(key: string, value: string | number): Model | null;
+    static findBy<T>(this: Constructor<T>, key: string, value: string | number): T | null;
     /**
      * Find a model instance using key/value pair or
      * fail with an exception
@@ -290,7 +290,7 @@ declare class Model extends BaseModel {
      *
      * @throws {ModelNotFoundException} If unable to find row
      */
-    static findByOrFail(key: string, value: string | number): Model;
+    static findByOrFail<T>(this: Constructor<T>, key: string, value: string | number): T;
     /**
      * Returns the first row. This method will add orderBy asc
      * clause
@@ -300,7 +300,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model|Null}
      */
-    static first(): Model | null;
+    static first<T>(this: Constructor<T>): T | null;
     /**
      * Returns the first row or throw an exception.
      * This method will add orderBy asc clause.
@@ -312,7 +312,7 @@ declare class Model extends BaseModel {
      *
      * @throws {ModelNotFoundException} If unable to find row
      */
-    static firstOrFail(): Model;
+    static firstOrFail<T>(this: Constructor<T>): T;
     /**
      * Find a row or create a new row when it doesn't
      * exists.
@@ -326,7 +326,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model}
      */
-    static findOrCreate(whereClause: any, payload: any, trx?: any): Model;
+    static findOrCreate<T>(this: Constructor<T>, whereClause: any, payload: any, trx?: any): T;
     /**
      * Find row from database or returns an instance of
      * new one.
@@ -338,7 +338,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model}
      */
-    static findOrNew(whereClause: any, payload: any): Model;
+    static findOrNew<T>(this: Constructor<T>, whereClause: any, payload: any): T;
     /**
      * Fetch everything from the database
      *
@@ -347,7 +347,7 @@ declare class Model extends BaseModel {
      *
      * @return {Collection}
      */
-    static all(): Collection;
+    static all<T>(this: Constructor<T>): Collection;
     /**
      * Select x number of rows
      *
@@ -358,7 +358,7 @@ declare class Model extends BaseModel {
      *
      * @return {Collection}
      */
-    static pick(limit?: number): Collection;
+    static pick<T>(this: Constructor<T>, limit?: number): Collection;
     /**
      * Select x number of rows in inverse
      *
@@ -369,7 +369,7 @@ declare class Model extends BaseModel {
      *
      * @return {Collection}
      */
-    static pickInverse(limit?: number): Collection;
+    static pickInverse<T>(this: Constructor<T>, limit?: number): Collection;
     /**
      * Returns an array of ids.
      *
@@ -380,7 +380,7 @@ declare class Model extends BaseModel {
      *
      * @return {Array}
      */
-    static ids(): any[];
+    static ids<T>(this: Constructor<T>): number[];
     /**
      * Returns an object of key/value pairs.
      * This method will not eagerload relationships.
@@ -690,7 +690,7 @@ declare class Model extends BaseModel {
      *
      * @return {Boolean} Whether or not the model was persisted
      */
-    save(trx: any): boolean;
+    save(trx?: any): boolean;
     /**
      * Deletes the model instance from the database. Also this
      * method will freeze the model instance for updates.
@@ -700,7 +700,7 @@ declare class Model extends BaseModel {
      *
      * @return {Boolean}
      */
-    delete(trx: any): boolean;
+    delete(trx?: any): boolean;
     /**
      * Perform required actions to newUp the model instance. This
      * method does not call setters since it is supposed to be
@@ -773,7 +773,7 @@ declare class Model extends BaseModel {
      *
      * @return {HasOne}
      */
-    hasOne(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("@adonisjs/lucid/src/Lucid/Relations/HasOne");
+    hasOne(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/HasOne");
     // hasOne(relatedModel: string | Class, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/HasOne");
     /**
      * Returns an instance of @ref('HasMany') relation
@@ -786,7 +786,7 @@ declare class Model extends BaseModel {
      *
      * @return {HasMany}
      */
-    hasMany(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("@adonisjs/lucid/src/Lucid/Relations/HasMany");
+    hasMany(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/HasMany");
     // hasMany(relatedModel: string | Class, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/HasMany");
     /**
      * Returns an instance of @ref('BelongsTo') relation
@@ -799,7 +799,7 @@ declare class Model extends BaseModel {
      *
      * @return {BelongsTo}
      */
-    belongsTo(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("@adonisjs/lucid/src/Lucid/Relations/BelongsTo");
+    belongsTo(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/BelongsTo");
     // belongsTo(relatedModel: string | Class, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/BelongsTo");
     /**
      * Returns an instance of @ref('BelongsToMany') relation
@@ -814,7 +814,7 @@ declare class Model extends BaseModel {
      *
      * @return {BelongsToMany}
      */
-    belongsToMany(relatedModel: string | Model, foreignKey?: string, relatedForeignKey?: string, primaryKey?: string, relatedPrimaryKey?: string): import("@adonisjs/lucid/src/Lucid/Relations/BelongsToMany");
+    belongsToMany(relatedModel: string | Model, foreignKey?: string, relatedForeignKey?: string, primaryKey?: string, relatedPrimaryKey?: string): import("../Relations/BelongsToMany");
     // belongsToMany(relatedModel: Class | string, foreignKey: string, relatedForeignKey: string, primaryKey: string, relatedPrimaryKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/BelongsToMany");
     /**
      * Returns instance of @ref('HasManyThrough')
@@ -828,7 +828,7 @@ declare class Model extends BaseModel {
      *
      * @return {HasManyThrough}
      */
-    manyThrough(relatedModel: Class | string, relatedMethod: string, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/HasManyThrough");
+    manyThrough(relatedModel: typeof Model | string, relatedMethod: string, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/HasManyThrough");
     /**
      * Reload the model instance in memory. Some may
      * not like it, but in real use cases no one
@@ -840,12 +840,4 @@ declare class Model extends BaseModel {
      */
     reload(): void;
 }
-// import BaseModel = require("@adonisjs/lucid/src/Lucid/Model/Base");
-// import QueryBuilder = require("@adonisjs/lucid/src/Lucid/QueryBuilder");
-import VanillaSerializer = require('../Serializers/Vanilla');
-
-import QueryBuilder = require('../QueryBuilder');
-import BaseModel = require('./Base');
-import knex = require('knex');
-// import knex = require('Types/knex');
 //# sourceMappingURL=index.d.ts.map
