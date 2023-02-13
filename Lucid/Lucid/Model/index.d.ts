@@ -2,8 +2,8 @@ export = Model;
 import VanillaSerializer = require('../Serializers/Vanilla');
 import QueryBuilder = require('../QueryBuilder');
 import BaseModel from './Base';
-type Serializer = VanillaSerializer
-type Collection = Promise<Serializer>
+type Serializer<T> = VanillaSerializer<T>
+type Collection<T> = Promise<Serializer<T>>
 type Constructor<T> = { new(): T }
 type Mixed = any
 
@@ -249,7 +249,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model|Null}
      */
-    static find<T>(this: Constructor<T>, value: string | number): T | null;
+    static find<T>(this: Constructor<T>, value: string | number): Promise<T | null>;
     /**
      * Find a row using the primary key or
      * fail with an exception
@@ -263,7 +263,7 @@ declare class Model extends BaseModel {
      *
      * @throws {ModelNotFoundException} If unable to find row
      */
-    static findOrFail<T>(this: Constructor<T>, value: string | number): T;
+    static findOrFail<T>(this: Constructor<T>, value: string | number): Promise<T>;
     /**
      * Find a model instance using key/value pair
      *
@@ -275,7 +275,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model|Null}
      */
-    static findBy<T>(this: Constructor<T>, key: string, value: string | number): T | null;
+    static findBy<T>(this: Constructor<T>, key: string, value: string | number): Promise<T | null>;
     /**
      * Find a model instance using key/value pair or
      * fail with an exception
@@ -290,7 +290,7 @@ declare class Model extends BaseModel {
      *
      * @throws {ModelNotFoundException} If unable to find row
      */
-    static findByOrFail<T>(this: Constructor<T>, key: string, value: string | number): T;
+    static findByOrFail<T>(this: Constructor<T>, key: string, value: string | number): Promise<T>;
     /**
      * Returns the first row. This method will add orderBy asc
      * clause
@@ -300,7 +300,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model|Null}
      */
-    static first<T>(this: Constructor<T>): T | null;
+    static first<T>(this: Constructor<T>): Promise<T | null>;
     /**
      * Returns the first row or throw an exception.
      * This method will add orderBy asc clause.
@@ -312,7 +312,7 @@ declare class Model extends BaseModel {
      *
      * @throws {ModelNotFoundException} If unable to find row
      */
-    static firstOrFail<T>(this: Constructor<T>): T;
+    static firstOrFail<T>(this: Constructor<T>): Promise<T>;
     /**
      * Find a row or create a new row when it doesn't
      * exists.
@@ -326,7 +326,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model}
      */
-    static findOrCreate<T>(this: Constructor<T>, whereClause: any, payload: any, trx?: any): T;
+    static findOrCreate<T>(this: Constructor<T>, whereClause: any, payload: any, trx?: any): Promise<T>;
     /**
      * Find row from database or returns an instance of
      * new one.
@@ -338,7 +338,7 @@ declare class Model extends BaseModel {
      *
      * @return {Model}
      */
-    static findOrNew<T>(this: Constructor<T>, whereClause: any, payload: any): T;
+    static findOrNew<T>(this: Constructor<T>, whereClause: any, payload: any): Promise<T>;
     /**
      * Fetch everything from the database
      *
@@ -347,7 +347,7 @@ declare class Model extends BaseModel {
      *
      * @return {Collection}
      */
-    static all<T>(this: Constructor<T>): Collection;
+    static all<T>(this: Constructor<T>): Collection<T>;
     /**
      * Select x number of rows
      *
@@ -358,7 +358,7 @@ declare class Model extends BaseModel {
      *
      * @return {Collection}
      */
-    static pick<T>(this: Constructor<T>, limit?: number): Collection;
+    static pick<T>(this: Constructor<T>, limit?: number): Collection<T>;
     /**
      * Select x number of rows in inverse
      *
@@ -369,7 +369,7 @@ declare class Model extends BaseModel {
      *
      * @return {Collection}
      */
-    static pickInverse<T>(this: Constructor<T>, limit?: number): Collection;
+    static pickInverse<T>(this: Constructor<T>, limit?: number): Collection<T>;
     /**
      * Returns an array of ids.
      *
@@ -404,7 +404,7 @@ declare class Model extends BaseModel {
     *
     * @return {Number}
     */
-    static getCount(columnName?: string): number;
+    static getCount(columnName?: string): Promise<number>;
     /**
     * Return a distinct count of all model records.
     *
@@ -414,7 +414,7 @@ declare class Model extends BaseModel {
     *
     * @return {Number}
     */
-    static getCountDistinct(columnName: string): number;
+    static getCountDistinct(columnName: string): Promise<number>;
     /**
     * Return the average of all values of columnName.
     *
@@ -424,7 +424,7 @@ declare class Model extends BaseModel {
     *
     * @return {Number}
     */
-    static getAvg(columnName: string): number;
+    static getAvg(columnName: string): Promise<number>;
     /**
     * Return the average of all distinct values of columnName.
     *
@@ -434,7 +434,7 @@ declare class Model extends BaseModel {
     *
     * @return {Number}
     */
-    static getAvgDistinct(columnName: string): number;
+    static getAvgDistinct(columnName: string): Promise<number>;
     /**
     * Return the minimum of all values of columnName.
     *
@@ -444,7 +444,7 @@ declare class Model extends BaseModel {
     *
     * @return {Number}
     */
-    static getMin(columnName: string): number;
+    static getMin(columnName: string): Promise<number>;
     /**
     * Return the maximum of all values of columnName.
     *
@@ -454,7 +454,7 @@ declare class Model extends BaseModel {
     *
     * @return {Number}
     */
-    static getMax(columnName: string): number;
+    static getMax(columnName: string): Promise<number>;
     /**
     * Return the sum of all values of columnName.
     *
@@ -464,7 +464,7 @@ declare class Model extends BaseModel {
     *
     * @return {Number}
     */
-    static getSum(columnName: string): number;
+    static getSum(columnName: string): Promise<number>;
     /**
     * Return the sum of all distinct values of columnName.
     *
@@ -474,7 +474,7 @@ declare class Model extends BaseModel {
     *
     * @return {Number}
     */
-    static getSumDistinct(columnName: string): number;
+    static getSumDistinct(columnName: string): Promise<number>;
     /**
      * Override primary key value.
      *
@@ -690,7 +690,7 @@ declare class Model extends BaseModel {
      *
      * @return {Boolean} Whether or not the model was persisted
      */
-    save(trx?: any): boolean;
+    save(trx?: any): Promise<boolean>;
     /**
      * Deletes the model instance from the database. Also this
      * method will freeze the model instance for updates.
@@ -700,7 +700,7 @@ declare class Model extends BaseModel {
      *
      * @return {Boolean}
      */
-    delete(trx?: any): boolean;
+    delete(trx?: any): Promise<boolean>;
     /**
      * Perform required actions to newUp the model instance. This
      * method does not call setters since it is supposed to be
@@ -773,7 +773,7 @@ declare class Model extends BaseModel {
      *
      * @return {HasOne}
      */
-    hasOne(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/HasOne");
+    hasOne(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/HasOne")<any>;
     // hasOne(relatedModel: string | Class, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/HasOne");
     /**
      * Returns an instance of @ref('HasMany') relation
@@ -786,7 +786,7 @@ declare class Model extends BaseModel {
      *
      * @return {HasMany}
      */
-    hasMany(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/HasMany");
+    hasMany(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/HasMany")<any>;
     // hasMany(relatedModel: string | Class, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/HasMany");
     /**
      * Returns an instance of @ref('BelongsTo') relation
@@ -799,7 +799,7 @@ declare class Model extends BaseModel {
      *
      * @return {BelongsTo}
      */
-    belongsTo(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/BelongsTo");
+    belongsTo(relatedModel: string | Model, primaryKey?: string, foreignKey?: string): import("../Relations/BelongsTo")<any>;
     // belongsTo(relatedModel: string | Class, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/BelongsTo");
     /**
      * Returns an instance of @ref('BelongsToMany') relation
@@ -814,7 +814,7 @@ declare class Model extends BaseModel {
      *
      * @return {BelongsToMany}
      */
-    belongsToMany(relatedModel: string | Model, foreignKey?: string, relatedForeignKey?: string, primaryKey?: string, relatedPrimaryKey?: string): import("../Relations/BelongsToMany");
+    belongsToMany(relatedModel: string | Model, foreignKey?: string, relatedForeignKey?: string, primaryKey?: string, relatedPrimaryKey?: string): import("../Relations/BelongsToMany")<any>;
     // belongsToMany(relatedModel: Class | string, foreignKey: string, relatedForeignKey: string, primaryKey: string, relatedPrimaryKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/BelongsToMany");
     /**
      * Returns instance of @ref('HasManyThrough')
@@ -828,7 +828,7 @@ declare class Model extends BaseModel {
      *
      * @return {HasManyThrough}
      */
-    manyThrough(relatedModel: typeof Model | string, relatedMethod: string, primaryKey: string, foreignKey: string): typeof import("@adonisjs/lucid/src/Lucid/Relations/HasManyThrough");
+    manyThrough(relatedModel: typeof Model | string, relatedMethod: string, primaryKey: string, foreignKey: string): import("../Relations/HasManyThrough")<any>;
     /**
      * Reload the model instance in memory. Some may
      * not like it, but in real use cases no one

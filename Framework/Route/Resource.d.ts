@@ -1,3 +1,4 @@
+import Macroable = require('macroable')
 export = RouteResource;
 /**
  * Route Resource class is used to define resourceful
@@ -8,7 +9,7 @@ export = RouteResource;
  * @group Http
  * @constructor
  */
-declare class RouteResource {
+declare class RouteResource extends Macroable {
     constructor(resource: any, controller: any, groupPrefix?: any);
     _resourceUrl: string;
     _controller: any;
@@ -210,6 +211,12 @@ declare class RouteResource {
      * ```
      */
     formats(formats: any[], strict?: boolean): void;
+
+    /**
+     * Adding resource macro to apply validator on
+     * route resource
+     */
+    validator?(validatorClass: Map<string[], string[]>): this
 }
 declare namespace RouteResource {
     const _macros: any;

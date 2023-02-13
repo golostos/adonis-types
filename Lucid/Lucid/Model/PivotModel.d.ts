@@ -73,5 +73,5 @@ declare class PivotModel extends BaseModel {
     save(trx: any): void;
     primaryKeyValue: any;
 }
-import BaseModel = require("@adonisjs/lucid/src/Lucid/Model/Base");
+import BaseModel = require("./Base");
 //# sourceMappingURL=PivotModel.d.ts.map

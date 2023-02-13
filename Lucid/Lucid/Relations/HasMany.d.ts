@@ -7,7 +7,7 @@ export = HasMany;
  * @class HasMany
  * @constructor
  */
-declare class HasMany extends BaseRelation {
+declare class HasMany<TModel> extends BaseRelation<TModel> {
     /**
      * Persists the parent model instance if it's not
      * persisted already. This is done before saving
@@ -112,5 +112,5 @@ declare class HasMany extends BaseRelation {
      */
     saveMany(arrayOfRelatedInstances: any[], trx?: any): any[];
 }
-import BaseRelation = require("@adonisjs/lucid/src/Lucid/Relations/BaseRelation");
+import BaseRelation = require("./BaseRelation");
 //# sourceMappingURL=HasMany.d.ts.map

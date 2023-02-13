@@ -1,4 +1,6 @@
 export = BelongsTo;
+interface BaseRelationCustom<TModel> extends Omit<BaseRelation<TModel>, 'first'> { }
+declare class BaseRelationCustom<TModel> { }
 /**
  * The BelongsTo relationship defines a relation between
  * two models
@@ -6,7 +8,7 @@ export = BelongsTo;
  * @class BelongsTo
  * @constructor
  */
-declare class BelongsTo extends BaseRelation {
+declare class BelongsTo<TModel> extends BaseRelationCustom<TModel> {
     /**
      * Returns the first row for the related model
      *
@@ -57,7 +59,7 @@ declare class BelongsTo extends BaseRelation {
      *
      * @return {Object}
      */
-    relatedWhere(count: boolean, counter: Integer): any;
+    relatedWhere(count: boolean, counter: number): any;
     /**
      * Adds `on` clause to the innerjoin context. This
      * method is mainly used by HasManyThrough
@@ -96,5 +98,5 @@ declare class BelongsTo extends BaseRelation {
      */
     dissociate(trx?: any): Promise<any>;
 }
-import BaseRelation = require("@adonisjs/lucid/src/Lucid/Relations/BaseRelation");
+import BaseRelation = require("./BaseRelation");
 //# sourceMappingURL=BelongsTo.d.ts.map

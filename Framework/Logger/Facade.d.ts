@@ -26,5 +26,5 @@ declare class LoggerFacade {
      */
     transport(name: string): Logger;
 }
-import Logger = require("@adonisjs/framework/src/Logger");
+import Logger = require("./index");
 //# sourceMappingURL=Facade.d.ts.map

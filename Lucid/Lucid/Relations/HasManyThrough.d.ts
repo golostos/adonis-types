@@ -6,7 +6,7 @@ export = HasManyThrough;
  * @class BelongsToMany
  * @constructor
  */
-declare class HasManyThrough extends BaseRelation {
+declare class HasManyThrough<TModel> extends BaseRelation<TModel> {
     constructor(parentInstance: any, RelatedModel: any, relatedMethod: any, primaryKey: any, foreignKey: any);
     _relatedModelRelation: any;
     _relatedFields: any[];
@@ -119,5 +119,5 @@ declare class HasManyThrough extends BaseRelation {
     createMany(): void;
     saveMany(): void;
 }
-import BaseRelation = require("@adonisjs/lucid/src/Lucid/Relations/BaseRelation");
+import BaseRelation = require("./BaseRelation");
 //# sourceMappingURL=HasManyThrough.d.ts.map

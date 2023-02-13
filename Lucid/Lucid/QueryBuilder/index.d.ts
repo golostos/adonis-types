@@ -1,9 +1,9 @@
-import VanillaSerializer from '../Serializers/Vanilla';
 import Model from '../Model'
 import type knex from '../../../knex';
 export = QueryBuilder;
-type Serializer = VanillaSerializer
-type Collection = Promise<Serializer>
+import VanillaSerializer from '../Serializers/Vanilla';
+type Serializer<T> = VanillaSerializer<T>
+type Collection<T> = Promise<Serializer<T>>
 type Mixed = any
 // type Constructor<T> = { new(): T }
 // type FullQueryBuilder = knex.QueryBuilder
@@ -174,7 +174,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @return {Serializer} Instance of model serializer
      */
-    fetch(): Promise<Serializer>;
+    fetch(): Promise<Serializer<TModel>>;
     /**
      * Returns the first row from the database.
      *
@@ -292,7 +292,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @return {Collection}
      */
-    pickInverse(limit?: number): Collection;
+    pickInverse(limit?: number): Collection<TModel>;
     /**
      * Pick x number of rows from the database
      *
@@ -303,7 +303,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @return {Collection}
      */
-    pick(limit?: number): Collection;
+    pick(limit?: number): Collection<TModel>;
     /**
      * Eagerload relationships when fetching the parent
      * record

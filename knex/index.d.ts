@@ -1348,7 +1348,7 @@ declare namespace Knex {
       TResult2 = AggregationQueryResult<TResult, Dict<ResolveTableType<TRecord>[TKey]>>
     >(
       ...columnNames: readonly TKey[]
-    ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TRecord>;
     <
       TAliases extends {} = Readonly<Record<string, string | string[] | Knex.Raw>>,
       TResult2 = AggregationQueryResult<TResult, {
@@ -1358,10 +1358,10 @@ declare namespace Knex {
           TRecord[K] :
           TValue
       }>
-    >(aliases: TAliases): QueryBuilder<TRecord, TResult2>;
+    >(aliases: TAliases): AdonisQueryBuilder<TRecord>;
     <TResult2 = AggregationQueryResult<TResult, Dict<TValue>>>(
       ...columnNames: ReadonlyArray<Readonly<Record<string, string | readonly string[] | Knex.Raw>> | Knex.Raw | string>
-    ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TRecord>;
   }
 
   interface GroupBy<TRecord = any, TResult = unknown[]>

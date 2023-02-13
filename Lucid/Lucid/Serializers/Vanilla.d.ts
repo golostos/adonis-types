@@ -9,7 +9,7 @@ export = VanillaSerializer;
  * @class VanillaSerializer
  * @constructor
  */
-declare class VanillaSerializer {
+declare class VanillaSerializer<TModel> {
     constructor(rows: Model[], pages?: any, isOne?: boolean);
     /**
      * The serializer rows. All rows should be instance
@@ -19,7 +19,7 @@ declare class VanillaSerializer {
      *
      * @type {Model[]}
      */
-    rows: Model[];
+    rows: TModel[];
     /**
      * The pagination meta data
      *

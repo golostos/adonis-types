@@ -1,6 +1,9 @@
 export = BelongsToMany;
 import Model from '../Model'
-
+import VanillaSerializer from '../Serializers/Vanilla';
+type Serializer<T> = VanillaSerializer<T>
+interface BaseRelationCustom<TModel> extends Omit<BaseRelation<TModel>, 'delete' | 'update' | 'select' | 'load'> { }
+declare class BaseRelationCustom<TModel> { }
 /**
  * BelongsToMany class builds relationship between
  * two models with the help of pivot table/model
@@ -8,7 +11,7 @@ import Model from '../Model'
  * @class BelongsToMany
  * @constructor
  */
-declare class BelongsToMany extends BaseRelation {
+declare class BelongsToMany<TModel> extends BaseRelationCustom<TModel> {
     constructor(parentInstance: Model, RelatedModel: Model, primaryKey: string, foreignKey: string, relatedPrimaryKey: string, relatedForeignKey: string)
     // constructor(parentInstance: any, relatedModel: any, primaryKey: any, foreignKey: any, relatedPrimaryKey: any, relatedForeignKey: any);
     relatedForeignKey: any;
@@ -19,7 +22,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @type {[type]}
      */
-    _PivotModel: [type];
+    _PivotModel: [any];
     scopesIterator: any;
     /**
      * Settings related to pivot table only
@@ -105,7 +108,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @param  {String}       operator
      * @param  {String}       key
-     * @param  {...Spread}    args
+     * @param  {...any}    args
      *
      * @return {void}
      *
@@ -228,7 +231,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @chainable
      */
-    select(columns: any[], ...args: any[]): BelongsToMany;
+    select(columns: any[], ...args: any[]): BelongsToMany<any>;
     /**
      * Define a fully qualified model to be used for
      * making pivot table queries and using defining
@@ -240,7 +243,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @chainable
      */
-    pivotModel(pivotModel: Model): BelongsToMany;
+    pivotModel(pivotModel: Model): BelongsToMany<any>;
     /**
      * Define the pivot table
      *
@@ -250,7 +253,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @chainable
      */
-    pivotTable(table: string): BelongsToMany;
+    pivotTable(table: string): BelongsToMany<any>;
     /**
      * Define the primary key to be selected for the
      * pivot table.
@@ -261,7 +264,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @chainable
      */
-    pivotPrimaryKey(key: string): BelongsToMany;
+    pivotPrimaryKey(key: string): BelongsToMany<any>;
     /**
      * Make sure `created_at` and `updated_at` timestamps
      * are being used
@@ -270,7 +273,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @chainable
      */
-    withTimestamps(): BelongsToMany;
+    withTimestamps(): BelongsToMany<any>;
     /**
      * Fields to be selected from pivot table
      *
@@ -280,7 +283,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @chainable
      */
-    withPivot(fields: any[]): BelongsToMany;
+    withPivot(fields: any[]): BelongsToMany<any>;
     /**
      * Returns an array of values to be used for running
      * whereIn query when eagerloading relationships.
@@ -298,44 +301,44 @@ declare class BelongsToMany extends BaseRelation {
      * @method whereInPivot
      *
      * @param  {String}     key
-     * @param  {...Spread}  args
+     * @param  {...any}  args
      *
      * @chainable
      */
-    whereInPivot(key: string, ...args: Spread[]): BelongsToMany;
+    whereInPivot(key: string, ...args: any[]): BelongsToMany<any>;
     /**
      * Make a orWhere clause on the pivot table
      *
      * @method orWherePivot
      *
      * @param  {String}     key
-     * @param  {...Spread}  args
+     * @param  {...any}  args
      *
      * @chainable
      */
-    orWherePivot(key: string, ...args: Spread[]): BelongsToMany;
+    orWherePivot(key: string, ...args: any[]): BelongsToMany<any>;
     /**
      * Make a andWhere clause on the pivot table
      *
      * @method andWherePivot
      *
      * @param  {String}     key
-     * @param  {...Spread}  args
+     * @param  {...any}  args
      *
      * @chainable
      */
-    andWherePivot(key: string, ...args: Spread[]): BelongsToMany;
+    andWherePivot(key: string, ...args: any[]): BelongsToMany<any>;
     /**
      * Where clause on pivot table
      *
      * @method wherePivot
      *
      * @param  {String}    key
-     * @param  {...Spread} args
+     * @param  {...any} args
      *
      * @chainable
      */
-    wherePivot(key: string, ...args: Spread[]): BelongsToMany;
+    wherePivot(key: string, ...args: any[]): BelongsToMany<any>;
     /**
      * Method called when eagerloading for a single
      * instance
@@ -363,7 +366,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @return {Serializer}
      */
-    fetch(): Serializer;
+    fetch(): Promise<Serializer<TModel>>;
     /**
      * Groups related instances with their foriegn keys
      *
@@ -395,7 +398,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @return {Object}
      */
-    relatedWhere(count: boolean, counter: Integer): any;
+    relatedWhere(count: boolean, counter: number): any;
     /**
      * Adds `on` clause to the innerjoin context. This
      * method is mainly used by HasManyThrough
@@ -416,7 +419,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @return {Promise}
      */
-    attach(references: number | string | any[], pivotCallback?: Function, trx: any): Promise<any>;
+    attach(references: number | string | any[], pivotCallback?: Function, trx?: any): Promise<any>;
     /**
      * Delete related model rows in bulk and also detach
      * them from the pivot table.
@@ -463,7 +466,7 @@ declare class BelongsToMany extends BaseRelation {
      *
      * @return {void}
      */
-    sync(references: any, pivotCallback?: Function, trx: any): void;
+    sync(references: any, pivotCallback?: Function, trx?: any): void;
     /**
      * Save the related model instance and setup the relationship
      * inside pivot table
@@ -516,5 +519,5 @@ declare class BelongsToMany extends BaseRelation {
      */
     createMany(rows: any[], pivotCallback: Function): any[];
 }
-import BaseRelation = require("@adonisjs/lucid/src/Lucid/Relations/BaseRelation");
+import BaseRelation = require("./BaseRelation");
 //# sourceMappingURL=BelongsToMany.d.ts.map

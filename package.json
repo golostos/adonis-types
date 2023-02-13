@@ -6,9 +6,17 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/golostos/adonis-types.git"
+  },
   "scripts": {},
   "dependencies": {
-    "tarn": "^3.0.1"
+    "tarn": "^3.0.1",
+    "pluralize": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/pluralize": "^0.0.29"
   },
   "author": "Alexander Dmitriev",
   "license": "MIT"

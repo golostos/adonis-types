@@ -1,5 +1,7 @@
 export = BaseRelation;
 import Model from '../Model'
+import type knex from '../../../knex';
+type Mixed = any
 /**
  * Base relation is supposed to be extended by other
  * relations. It takes care of commonly required
@@ -8,7 +10,7 @@ import Model from '../Model'
  * @class BaseRelation
  * @constructor
  */
-declare class BaseRelation {
+declare class BaseRelation<TModel> extends knex.QueryBuilder<TModel> {
     constructor(parentInstance: Model, RelatedModel: Model, primaryKey: string, foreignKey: string)
     // constructor(parentInstance: any, RelatedModel: any, primaryKey: any, foreignKey: any);
     parentInstance: any;
