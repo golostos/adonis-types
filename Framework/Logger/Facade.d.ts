@@ -10,7 +10,7 @@ export = LoggerFacade;
  * @class LoggerFacade
  * @constructor
  */
-declare class LoggerFacade {
+declare class LoggerFacade extends Logger {
     constructor(Config: any);
     Config: any;
     _loggerInstances: {};

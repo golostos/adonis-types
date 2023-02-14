@@ -294,7 +294,7 @@ declare class Route {
      * validates the request via validator
      * class
      */
-    validator?(validatorsMap: string): this
+    validator(validatorsMap: string): this
 }
 declare namespace Route {
     const _macros: any;

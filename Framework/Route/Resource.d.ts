@@ -216,7 +216,7 @@ declare class RouteResource extends Macroable {
      * Adding resource macro to apply validator on
      * route resource
      */
-    validator?(validatorClass: Map<string[], string[]>): this
+    validator(validatorClass: Map<string[], string[]>): this
 }
 declare namespace RouteResource {
     const _macros: any;

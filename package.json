@@ -1,6 +1,6 @@
 {
   "name": "adonis-types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Types for AdonisJS 4.1",
   "main": "index.js",
   "publishConfig": {
@@ -10,12 +10,15 @@
     "type": "git",
     "url": "https://github.com/golostos/adonis-types.git"
   },
-  "scripts": {},
+  "scripts": {
+    "gen": "tsc ../../node_modules/@adonisjs/ignitor/src/**/*.js --declaration --allowJs --emitDeclarationOnly --outDir Ignitor"
+  },
   "dependencies": {
     "@types/jscodeshift": "^0.11.6",
     "jscodeshift": "^0.14.0",
     "pluralize": "^8.0.0",
-    "tarn": "^3.0.1"
+    "tarn": "^3.0.1",
+    "pify": "^4.0.0"
   },
   "devDependencies": {
     "@types/pluralize": "^0.0.29"
