@@ -2,7 +2,7 @@ export = BelongsToMany;
 import Model from '../Model'
 import VanillaSerializer from '../Serializers/Vanilla';
 type Serializer<T> = VanillaSerializer<T>
-interface BaseRelationCustom<TModel> extends Omit<BaseRelation<TModel>, 'delete' | 'update' | 'select' | 'load'> { }
+interface BaseRelationCustom<TModel extends Model> extends Omit<BaseRelation<TModel>, 'delete' | 'update' | 'select' | 'load'> { }
 declare class BaseRelationCustom<TModel> { }
 /**
  * BelongsToMany class builds relationship between
@@ -11,7 +11,7 @@ declare class BaseRelationCustom<TModel> { }
  * @class BelongsToMany
  * @constructor
  */
-declare class BelongsToMany<TModel> extends BaseRelationCustom<TModel> {
+declare class BelongsToMany<TModel extends Model> extends BaseRelationCustom<TModel> {
     constructor(parentInstance: Model, RelatedModel: Model, primaryKey: string, foreignKey: string, relatedPrimaryKey: string, relatedForeignKey: string)
     // constructor(parentInstance: any, relatedModel: any, primaryKey: any, foreignKey: any, relatedPrimaryKey: any, relatedForeignKey: any);
     relatedForeignKey: any;

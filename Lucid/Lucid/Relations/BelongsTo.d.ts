@@ -1,5 +1,6 @@
 export = BelongsTo;
-interface BaseRelationCustom<TModel> extends Omit<BaseRelation<TModel>, 'first'> { }
+import Model from '../Model'
+interface BaseRelationCustom<TModel extends Model> extends Omit<BaseRelation<TModel>, 'first'> { }
 declare class BaseRelationCustom<TModel> { }
 /**
  * The BelongsTo relationship defines a relation between
@@ -8,7 +9,7 @@ declare class BaseRelationCustom<TModel> { }
  * @class BelongsTo
  * @constructor
  */
-declare class BelongsTo<TModel> extends BaseRelationCustom<TModel> {
+declare class BelongsTo<TModel extends Model> extends BaseRelationCustom<TModel> {
     /**
      * Returns the first row for the related model
      *
@@ -16,7 +17,7 @@ declare class BelongsTo<TModel> extends BaseRelationCustom<TModel> {
      *
      * @return {Object|Null}
      */
-    first(): any | null;
+    first(): Promise<TModel | null>;
     /**
      * Map values from model instances to an array. It is required
      * to make `whereIn` query when eagerloading results.
@@ -47,7 +48,7 @@ declare class BelongsTo<TModel> extends BaseRelationCustom<TModel> {
      *
      * @return {Object}
      */
-    fetch(): any;
+    fetch(): Promise<TModel | null>;
     /**
      * Adds a where clause to limit the select search
      * to related rows only.

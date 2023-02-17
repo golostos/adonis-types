@@ -8,8 +8,8 @@ type Mixed = any
 // type Constructor<T> = { new(): T }
 // type FullQueryBuilder = knex.QueryBuilder
 
-interface KnexQueryBuilder<TModel> extends Omit<knex.QueryBuilder<TModel>, 'delete' | 'first' | 'insert' | 'truncate' | 'update' | 'with' | 'clone'> {}
-declare class KnexQueryBuilder<TModel> {}
+interface KnexQueryBuilder<TModel extends {}, TRecord = any> extends Omit<knex.QueryBuilder<TRecord, any, TModel>, 'delete' | 'first' | 'insert' | 'truncate' | 'update' | 'with' | 'clone'> {}
+declare class KnexQueryBuilder<TModel extends {}, TRecord extends {}> {}
 /**
  * Query builder for the lucid models extended
  * by the @ref('Database') class.
@@ -17,7 +17,7 @@ declare class KnexQueryBuilder<TModel> {}
  * @class QueryBuilder
  * @constructor
  */
-declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
+declare class QueryBuilder<TModel extends {}, TRecord extends {}> extends KnexQueryBuilder<TModel, TRecord> {
     constructor(Model: Model, connection: any);
     Model: Model;
     connectionString: any;
@@ -165,7 +165,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    ignoreScopes(scopes?: any[]): QueryBuilder<TModel>;
+    ignoreScopes(scopes?: any[]): QueryBuilder<TModel, TRecord>;
     /**
      * Execute the query builder chain by applying global scopes
      *
@@ -315,7 +315,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    with(relation: string, callback?: Function): QueryBuilder<TModel>;
+    with(relation: string, callback?: Function): QueryBuilder<TModel, TRecord>;
     /**
      * Adds a check on there parent model to fetch rows
      * only where related rows exists or as per the
@@ -329,7 +329,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    has(relation: string, expression: string, value: Mixed): QueryBuilder<TModel>;
+    has(relation: string, expression: string, value: Mixed): QueryBuilder<TModel, TRecord>;
     /**
      * Similar to `has` but instead adds or clause
      *
@@ -341,7 +341,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    orHas(relation: string, expression: string, value: Mixed): QueryBuilder<TModel>;
+    orHas(relation: string, expression: string, value: Mixed): QueryBuilder<TModel, TRecord>;
     /**
      * Adds a check on the parent model to fetch rows where
      * related rows doesn't exists
@@ -352,7 +352,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    doesntHave(relation: string): QueryBuilder<TModel>;
+    doesntHave(relation: string): QueryBuilder<TModel, TRecord>;
     /**
      * Same as `doesntHave` but adds a `or` clause.
      *
@@ -362,7 +362,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    orDoesntHave(relation: string): QueryBuilder<TModel>;
+    orDoesntHave(relation: string): QueryBuilder<TModel, TRecord>;
     /**
      * Adds a query constraint just like has but gives you
      * a chance to pass a callback to add more constraints
@@ -376,7 +376,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    whereHas(relation: string, callback?: Function, expression?: string, value?: string): QueryBuilder<TModel>;
+    whereHas(relation: string, callback?: Function, expression?: string, value?: string): QueryBuilder<TModel, TRecord>;
     /**
      * Same as `whereHas` but with `or` clause
      *
@@ -389,7 +389,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    orWhereHas(relation: string, callback?: Function, expression?: string, value?: Mixed): QueryBuilder<TModel>;
+    orWhereHas(relation: string, callback?: Function, expression?: string, value?: Mixed): QueryBuilder<TModel, TRecord>;
     /**
      * Opposite of `whereHas`
      *
@@ -400,7 +400,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    whereDoesntHave(relation: string, callback: Function): QueryBuilder<TModel>;
+    whereDoesntHave(relation: string, callback: Function): QueryBuilder<TModel, TRecord>;
     /**
      * Same as `whereDoesntHave` but with `or` clause
      *
@@ -411,7 +411,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    orWhereDoesntHave(relation: string, callback: Function): QueryBuilder<TModel>;
+    orWhereDoesntHave(relation: string, callback: Function): QueryBuilder<TModel, TRecord>;
     /**
      * Returns count of a relationship
      *
@@ -428,7 +428,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      * query().withCount('profile as userProfile')
      * ```
      */
-    withCount(relation: string, callback?: Function): QueryBuilder<TModel>;
+    withCount(relation: string, callback?: Function): QueryBuilder<TModel, TRecord>;
     /**
      * Define fields to be visible for a single
      * query.
@@ -441,7 +441,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    setVisible(fields: any[]): QueryBuilder<TModel>;
+    setVisible(fields: any[]): QueryBuilder<TModel, TRecord>;
     /**
      * Define fields to be hidden for a single
      * query.
@@ -454,7 +454,7 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @chainable
      */
-    setHidden(fields: any[]): QueryBuilder<TModel>;
+    setHidden(fields: any[]): QueryBuilder<TModel, TRecord>;
     /**
      * Create a clone of Query builder
      *
@@ -462,6 +462,6 @@ declare class QueryBuilder<TModel> extends KnexQueryBuilder<TModel> {
      *
      * @return {QueryBuilde}
      */
-    clone(): QueryBuilder<TModel>;
+    clone(): QueryBuilder<TModel, TRecord>;
 }
 //# sourceMappingURL=index.d.ts.map

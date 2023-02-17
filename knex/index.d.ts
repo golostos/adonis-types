@@ -455,8 +455,8 @@ declare namespace Knex {
     : TCompositeTableType;
 
   interface OnConflictQueryBuilder<TRecord, TResult> {
-    ignore(): AdonisQueryBuilder<TRecord>;
-    merge(data?: DbRecord<TRecord>): AdonisQueryBuilder<TRecord>;
+    ignore(): AdonisQueryBuilder<TModel, TRecord>;
+    merge(data?: DbRecord<TRecord>): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   //
@@ -464,94 +464,94 @@ declare namespace Knex {
   //
   type ClearStatements = "with" | "select" | "columns" | "hintComments" | "where" | "union" | "join" | "group" | "order" | "having" | "limit" | "offset" | "counter" | "counters";
 
-  interface QueryInterface<TRecord extends {} = any, TResult = any> {
-    select: Select<TRecord, TResult>;
-    as: As<TRecord, TResult>;
-    columns: Select<TRecord, TResult>;
-    column: Select<TRecord, TResult>;
-    hintComment: HintComment<TRecord, TResult>;
-    from: Table<TRecord, TResult>;
-    into: Table<TRecord, TResult>;
-    table: Table<TRecord, TResult>;
-    distinct: Distinct<TRecord, TResult>;
-    distinctOn: DistinctOn<TRecord, TResult>;
+  interface QueryInterface<TRecord extends {} = any, TResult = any, TModel extends {} = any> {
+    select: Select<TRecord, TResult, TModel>;
+    as: As<TRecord, TResult, TModel>;
+    columns: Select<TRecord, TResult, TModel>;
+    column: Select<TRecord, TResult, TModel>;
+    hintComment: HintComment<TRecord, TResult, TModel>;
+    from: Table<TRecord, TResult, TModel>;
+    into: Table<TRecord, TResult, TModel>;
+    table: Table<TRecord, TResult, TModel>;
+    distinct: Distinct<TRecord, TResult, TModel>;
+    distinctOn: DistinctOn<TRecord, TResult, TModel>;
 
     // Joins
-    join: Join<TRecord, TResult>;
-    joinRaw: JoinRaw<TRecord, TResult>;
-    innerJoin: Join<TRecord, TResult>;
-    leftJoin: Join<TRecord, TResult>;
-    leftOuterJoin: Join<TRecord, TResult>;
-    rightJoin: Join<TRecord, TResult>;
-    rightOuterJoin: Join<TRecord, TResult>;
-    outerJoin: Join<TRecord, TResult>;
-    fullOuterJoin: Join<TRecord, TResult>;
-    crossJoin: Join<TRecord, TResult>;
+    join: Join<TRecord, TResult, TModel>;
+    joinRaw: JoinRaw<TRecord, TResult, TModel>;
+    innerJoin: Join<TRecord, TResult, TModel>;
+    leftJoin: Join<TRecord, TResult, TModel>;
+    leftOuterJoin: Join<TRecord, TResult, TModel>;
+    rightJoin: Join<TRecord, TResult, TModel>;
+    rightOuterJoin: Join<TRecord, TResult, TModel>;
+    outerJoin: Join<TRecord, TResult, TModel>;
+    fullOuterJoin: Join<TRecord, TResult, TModel>;
+    crossJoin: Join<TRecord, TResult, TModel>;
 
     // Withs
-    with: With<TRecord, TResult>;
-    withRecursive: With<TRecord, TResult>;
-    withRaw: WithRaw<TRecord, TResult>;
-    withSchema: WithSchema<TRecord, TResult>;
-    withWrapped: WithWrapped<TRecord, TResult>;
+    with: With<TRecord, TResult, TModel>;
+    withRecursive: With<TRecord, TResult, TModel>;
+    withRaw: WithRaw<TRecord, TResult, TModel>;
+    withSchema: WithSchema<TRecord, TResult, TModel>;
+    withWrapped: WithWrapped<TRecord, TResult, TModel>;
 
     // Wheres
-    where: Where<TRecord, TResult>;
-    andWhere: Where<TRecord, TResult>;
-    orWhere: Where<TRecord, TResult>;
-    whereNot: Where<TRecord, TResult>;
-    andWhereNot: Where<TRecord, TResult>;
-    orWhereNot: Where<TRecord, TResult>;
-    whereRaw: WhereRaw<TRecord, TResult>;
-    orWhereRaw: WhereRaw<TRecord, TResult>;
-    andWhereRaw: WhereRaw<TRecord, TResult>;
-    whereWrapped: WhereWrapped<TRecord, TResult>;
-    havingWrapped: WhereWrapped<TRecord, TResult>;
-    whereExists: WhereExists<TRecord, TResult>;
-    orWhereExists: WhereExists<TRecord, TResult>;
-    whereNotExists: WhereExists<TRecord, TResult>;
-    orWhereNotExists: WhereExists<TRecord, TResult>;
-    whereIn: WhereIn<TRecord, TResult>;
-    orWhereIn: WhereIn<TRecord, TResult>;
-    whereNotIn: WhereIn<TRecord, TResult>;
-    orWhereNotIn: WhereIn<TRecord, TResult>;
-    whereNull: WhereNull<TRecord, TResult>;
-    orWhereNull: WhereNull<TRecord, TResult>;
-    whereNotNull: WhereNull<TRecord, TResult>;
-    orWhereNotNull: WhereNull<TRecord, TResult>;
-    whereBetween: WhereBetween<TRecord, TResult>;
-    orWhereBetween: WhereBetween<TRecord, TResult>;
-    andWhereBetween: WhereBetween<TRecord, TResult>;
-    whereNotBetween: WhereBetween<TRecord, TResult>;
-    orWhereNotBetween: WhereBetween<TRecord, TResult>;
-    andWhereNotBetween: WhereBetween<TRecord, TResult>;
+    where: Where<TRecord, TResult, TModel>;
+    andWhere: Where<TRecord, TResult, TModel>;
+    orWhere: Where<TRecord, TResult, TModel>;
+    whereNot: Where<TRecord, TResult, TModel>;
+    andWhereNot: Where<TRecord, TResult, TModel>;
+    orWhereNot: Where<TRecord, TResult, TModel>;
+    whereRaw: WhereRaw<TRecord, TResult, TModel>;
+    orWhereRaw: WhereRaw<TRecord, TResult, TModel>;
+    andWhereRaw: WhereRaw<TRecord, TResult, TModel>;
+    whereWrapped: WhereWrapped<TRecord, TResult, TModel>;
+    havingWrapped: WhereWrapped<TRecord, TResult, TModel>;
+    whereExists: WhereExists<TRecord, TResult, TModel>;
+    orWhereExists: WhereExists<TRecord, TResult, TModel>;
+    whereNotExists: WhereExists<TRecord, TResult, TModel>;
+    orWhereNotExists: WhereExists<TRecord, TResult, TModel>;
+    whereIn: WhereIn<TRecord, TResult, TModel>;
+    orWhereIn: WhereIn<TRecord, TResult, TModel>;
+    whereNotIn: WhereIn<TRecord, TResult, TModel>;
+    orWhereNotIn: WhereIn<TRecord, TResult, TModel>;
+    whereNull: WhereNull<TRecord, TResult, TModel>;
+    orWhereNull: WhereNull<TRecord, TResult, TModel>;
+    whereNotNull: WhereNull<TRecord, TResult, TModel>;
+    orWhereNotNull: WhereNull<TRecord, TResult, TModel>;
+    whereBetween: WhereBetween<TRecord, TResult, TModel>;
+    orWhereBetween: WhereBetween<TRecord, TResult, TModel>;
+    andWhereBetween: WhereBetween<TRecord, TResult, TModel>;
+    whereNotBetween: WhereBetween<TRecord, TResult, TModel>;
+    orWhereNotBetween: WhereBetween<TRecord, TResult, TModel>;
+    andWhereNotBetween: WhereBetween<TRecord, TResult, TModel>;
 
     // Group by
-    groupBy: GroupBy<TRecord, TResult>;
-    groupByRaw: RawQueryBuilder<TRecord, TResult>;
+    groupBy: GroupBy<TRecord, TResult, TModel>;
+    groupByRaw: RawQueryBuilder<TRecord, TResult, TModel>;
 
     // Order by
-    orderBy: OrderBy<TRecord, TResult>;
-    orderByRaw: RawQueryBuilder<TRecord, TResult>;
+    orderBy: OrderBy<TRecord, TResult, TModel>;
+    orderByRaw: RawQueryBuilder<TRecord, TResult, TModel>;
 
     // Intersect
-    intersect: Intersect<TRecord, TResult>;
+    intersect: Intersect<TRecord, TResult, TModel>;
 
     // Union
-    union: Union<TRecord, TResult>;
-    unionAll: Union<TRecord, TResult>;
+    union: Union<TRecord, TResult, TModel>;
+    unionAll: Union<TRecord, TResult, TModel>;
 
     // Having
-    having: Having<TRecord, TResult>;
-    andHaving: Having<TRecord, TResult>;
-    havingRaw: RawQueryBuilder<TRecord, TResult>;
-    orHaving: Having<TRecord, TResult>;
-    orHavingRaw: RawQueryBuilder<TRecord, TResult>;
-    havingIn: HavingRange<TRecord, TResult>;
-    orHavingNotBetween: HavingRange<TRecord, TResult>;
-    havingNotBetween: HavingRange<TRecord, TResult>;
-    orHavingBetween: HavingRange<TRecord, TResult>;
-    havingBetween: HavingRange<TRecord, TResult>;
+    having: Having<TRecord, TResult, TModel>;
+    andHaving: Having<TRecord, TResult, TModel>;
+    havingRaw: RawQueryBuilder<TRecord, TResult, TModel>;
+    orHaving: Having<TRecord, TResult, TModel>;
+    orHavingRaw: RawQueryBuilder<TRecord, TResult, TModel>;
+    havingIn: HavingRange<TRecord, TResult, TModel>;
+    orHavingNotBetween: HavingRange<TRecord, TResult, TModel>;
+    havingNotBetween: HavingRange<TRecord, TResult, TModel>;
+    orHavingBetween: HavingRange<TRecord, TResult, TModel>;
+    havingBetween: HavingRange<TRecord, TResult, TModel>;
 
     // Clear
     clearSelect(): QueryBuilder<
@@ -568,16 +568,16 @@ declare namespace Knex {
       ? DeferredKeySelection<TBase, never>[]
       : TResult
     >;
-    clearWhere(): AdonisQueryBuilder<TRecord>;
-    clearGroup(): AdonisQueryBuilder<TRecord>;
-    clearOrder(): AdonisQueryBuilder<TRecord>;
-    clearHaving(): AdonisQueryBuilder<TRecord>;
-    clearCounters(): AdonisQueryBuilder<TRecord>;
-    clear(statement: ClearStatements): AdonisQueryBuilder<TRecord>;
+    clearWhere(): AdonisQueryBuilder<TModel, TRecord>;
+    clearGroup(): AdonisQueryBuilder<TModel, TRecord>;
+    clearOrder(): AdonisQueryBuilder<TModel, TRecord>;
+    clearHaving(): AdonisQueryBuilder<TModel, TRecord>;
+    clearCounters(): AdonisQueryBuilder<TModel, TRecord>;
+    clear(statement: ClearStatements): AdonisQueryBuilder<TModel, TRecord>;
 
     // Paging
-    offset(offset: number): AdonisQueryBuilder<TRecord>;
-    limit(limit: number): AdonisQueryBuilder<TRecord>;
+    offset(offset: number): AdonisQueryBuilder<TModel, TRecord>;
+    limit(limit: number): AdonisQueryBuilder<TModel, TRecord>;
 
     // Aggregation
     count: AsymmetricAggregation<TRecord, TResult, Lookup<ResultTypes.Registry, "Count", number | string>>;
@@ -900,8 +900,8 @@ declare namespace Knex {
   }
 
   interface As<TRecord, TResult> {
-    (columnName: keyof TRecord): AdonisQueryBuilder<TRecord>;
-    (columnName: string): AdonisQueryBuilder<TRecord>;
+    (columnName: keyof TRecord): AdonisQueryBuilder<TModel, TRecord>;
+    (columnName: string): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   type IntersectAliases<AliasUT> =
@@ -917,7 +917,7 @@ declare namespace Knex {
       >
     >;
 
-  interface AliasQueryBuilder<TRecord extends {} = any, TResult = unknown[]> {
+  interface AliasQueryBuilder<TRecord extends {} = any, TResult = unknown[], TModel = any> {
     <
       AliasUT extends InferrableColumnDescriptor<ResolveTableType<TRecord>>[],
       TResult2 = ArrayIfAlready<TResult, DeferredKeySelection.Augment<
@@ -928,7 +928,8 @@ declare namespace Knex {
       >>
       >(
       ...aliases: AliasUT
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     <
       AliasUT extends InferrableColumnDescriptor<ResolveTableType<TRecord>>[],
@@ -940,7 +941,8 @@ declare namespace Knex {
       >>
       >(
       aliases: AliasUT
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     <
       AliasUT extends (Dict | string)[],
@@ -952,7 +954,8 @@ declare namespace Knex {
       >>
       >(
       ...aliases: AliasUT
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     <
       AliasUT extends (Dict | string)[],
@@ -964,29 +967,32 @@ declare namespace Knex {
       >>
       >(
       aliases: AliasUT
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface Select<TRecord extends {} = any, TResult = unknown[]>
-    extends AliasQueryBuilder<TRecord, TResult>,
-    ColumnNameQueryBuilder<TRecord, TResult> {
-    (): AdonisQueryBuilder<TRecord>;
+  interface Select<TRecord extends {} = any, TResult = unknown[], TModel extends {} = any>
+    extends AliasQueryBuilder<TRecord, TResult, TModel>,
+    ColumnNameQueryBuilder<TRecord, TResult, TModel> {
+    (): AdonisQueryBuilder<TModel, TRecord>;
 
     <TResult2 = ArrayIfAlready<TResult, any>, TInnerRecord = any, TInnerResult = any>(
       ...subQueryBuilders: readonly QueryBuilder<TInnerRecord, TInnerResult>[]
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     <TResult2 = ArrayIfAlready<TResult, any>, TInnerRecord = any, TInnerResult = any>(
       subQueryBuilders: readonly QueryBuilder<TInnerRecord, TInnerResult>[]
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface HintComment<TRecord extends {} = any, TResult extends {} = any> {
-    (hint: string): AdonisQueryBuilder<TRecord>;
-    (hints: readonly string[]): AdonisQueryBuilder<TRecord>;
+  interface HintComment<TRecord extends {} = any, TResult extends {} = any, TModel extends {} = any> {
+    (hint: string): AdonisQueryBuilder<TModel, TRecord>;
+    (hints: readonly string[]): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface Table<TRecord extends {} = any, TResult extends {} = any> {
+  interface Table<TRecord extends {} = any, TResult extends {} = any, TModel extends {} = any> {
     <
       TTable extends TableNames,
       TRecord2 = TableType<TTable>,
@@ -994,58 +1000,63 @@ declare namespace Knex {
       >(
       tableName: TTable,
       options?: TableOptions
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TRecord2 = unknown,
       TResult2 = DeferredKeySelection.ReplaceBase<TResult, TRecord2>
       >(
       tableName: TableDescriptor | AliasDict,
       options?: TableOptions
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TRecord2 = unknown,
       TResult2 = DeferredKeySelection.ReplaceBase<TResult, TRecord2>
       >(
       callback: Function,
       options?: TableOptions
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TRecord2 = unknown,
       TResult2 = DeferredKeySelection.ReplaceBase<TResult, TRecord2>
       >(
       raw: Raw,
       options?: TableOptions
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   interface Distinct<TRecord extends {}, TResult = {}[]>
     extends ColumnNameQueryBuilder<TRecord, TResult> {}
 
-  interface DistinctOn<TRecord extends {}, TResult = {}[]> {
+  interface DistinctOn<TRecord extends {}, TResult = {}[], TModel extends {} = any> {
     <ColNameUT extends keyof TRecord>(
       ...columnNames: readonly ColNameUT[]
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     <ColNameUT extends keyof TRecord>(
       columnNames: readonly ColNameUT[]
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
-    (...columnNames: readonly string[]): AdonisQueryBuilder<TRecord>;
-    (columnNames: readonly string[]): AdonisQueryBuilder<TRecord>;
+    (...columnNames: readonly string[]): AdonisQueryBuilder<TModel, TRecord>;
+    (columnNames: readonly string[]): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   interface JoinCallback {
     (this: JoinClause, join: JoinClause): void;
   }
 
-  interface Join<TRecord extends {} = any, TResult = unknown[]> {
+  interface Join<TRecord extends {} = any, TResult = unknown[], TModel extends {} = any> {
     <
       TJoinTargetRecord extends {} = any,
       TRecord2 extends {} = TRecord & TJoinTargetRecord,
       TResult2 = DeferredKeySelection.ReplaceBase<TResult, TRecord2>
       >(
       raw: Raw
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TTable extends TableNames,
       TRecord2 = ResolveTableType<TRecord> & ResolveTableType<TableType<TTable>>,
@@ -1053,7 +1064,8 @@ declare namespace Knex {
       >(
       tableName: TTable,
       clause: JoinCallback
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TJoinTargetRecord extends {} = any,
       TRecord2 extends {} = TRecord & TJoinTargetRecord,
@@ -1061,7 +1073,8 @@ declare namespace Knex {
       >(
       tableName: TableDescriptor | AliasDict | QueryCallback,
       clause: JoinCallback
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TJoinTargetRecord extends {} = any,
       TRecord2 extends {} = TRecord & TJoinTargetRecord,
@@ -1069,7 +1082,8 @@ declare namespace Knex {
       >(
       tableName: TableDescriptor | AliasDict | QueryCallback,
       columns: { [key: string]: string | number | boolean | Raw }
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TJoinTargetRecord extends {} = any,
       TRecord2 extends {} = TRecord & TJoinTargetRecord,
@@ -1077,7 +1091,8 @@ declare namespace Knex {
       >(
       tableName: TableDescriptor | AliasDict | QueryCallback,
       raw: Raw
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TTable extends TableNames,
       TRecord2 = ResolveTableType<TRecord> & ResolveTableType<TableType<TTable>>,
@@ -1086,7 +1101,8 @@ declare namespace Knex {
       tableName: TTable,
       column1: string,
       column2: string
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TJoinTargetRecord extends {} = any,
       TRecord2 extends {} = TRecord & TJoinTargetRecord,
@@ -1095,7 +1111,8 @@ declare namespace Knex {
       tableName: TableDescriptor | AliasDict | QueryCallback,
       column1: string,
       column2: string
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TJoinTargetRecord extends {} = any,
       TRecord2 extends {} = TRecord & TJoinTargetRecord,
@@ -1104,7 +1121,8 @@ declare namespace Knex {
       tableName: TableDescriptor | AliasDict | QueryCallback,
       column1: string,
       raw: Raw
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TTable extends TableNames,
       TRecord2 = ResolveTableType<TRecord> & ResolveTableType<TableType<TTable>>,
@@ -1114,7 +1132,8 @@ declare namespace Knex {
       column1: string,
       operator: string,
       column2: string
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TJoinTargetRecord extends {} = any,
       TRecord2 extends {} = TRecord & TJoinTargetRecord,
@@ -1124,7 +1143,8 @@ declare namespace Knex {
       column1: string,
       operator: string,
       column2: string
-    ): QueryBuilder<TRecord2, TResult2>;
+    // ): QueryBuilder<TRecord2, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   interface JoinClause {
@@ -1176,179 +1196,177 @@ declare namespace Knex {
     type(type: string): JoinClause;
   }
 
-  interface JoinRaw<TRecord = any, TResult = unknown[]> {
+  interface JoinRaw<TRecord = any, TResult = unknown[], TModel extends {} = any> {
     (tableName: string, binding?: Value | ValueDict): QueryBuilder<
       TRecord,
-      TResult
+      TResult,
+      TModel
     >;
   }
 
-  interface With<TRecord = any, TResult = unknown[]>
-    extends WithRaw<TRecord, TResult>,
-      WithWrapped<TRecord, TResult> {}
+  interface With<TRecord = any, TResult = unknown[], Model extends {} = any>
+    extends WithRaw<TRecord, TResult, Model>,
+    WithWrapped<TRecord, TResult, Model> {}
 
-  interface WithRaw<TRecord = any, TResult = unknown[]> {
-    (alias: string, raw: Raw | QueryBuilder): AdonisQueryBuilder<TRecord>;
+  interface WithRaw<TRecord = any, TResult = unknown[], TModel extends {} = any> {
+    (alias: string, raw: Raw | QueryBuilder): AdonisQueryBuilder<TModel, TRecord>;
     (alias: string, sql: string, bindings?: readonly Value[] | Object): QueryBuilder<
       TRecord,
-      TResult
+      TResult,
+      TModel
     >;
   }
 
-  interface WithSchema<TRecord = any, TResult = unknown[]> {
-    (schema: string): AdonisQueryBuilder<TRecord>;
+  interface WithSchema<TRecord = any, TResult = unknown[], TModel extends {} = any> {
+    (schema: string): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface WithWrapped<TRecord = any, TResult = unknown[]> {
-    (alias: string, queryBuilder: QueryBuilder): AdonisQueryBuilder<TRecord>;
+  interface WithWrapped<TRecord = any, TResult = unknown[], TModel extends {} = any> {
+    (alias: string, queryBuilder: QueryBuilder): AdonisQueryBuilder<TModel, TRecord>;
     (
       alias: string,
       callback: (queryBuilder: QueryBuilder) => any
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface Where<TRecord = any, TResult = unknown, TModel = any>
+  interface Where<TRecord = any, TResult = unknown, TModel = any, TModel extends {} = any>
     extends WhereRaw<TRecord, TResult>,
     WhereWrapped<TRecord, TResult>,
     WhereNull<TRecord, TResult> {
-    (raw: Raw): AdonisQueryBuilder<TRecord>;
+    (raw: Raw): AdonisQueryBuilder<TModel, TRecord>;
 
-    (callback: QueryCallback<TRecord, TResult>): AdonisQueryBuilder<TRecord>;
+    (callback: QueryCallback<TRecord, TResult>): AdonisQueryBuilder<TModel, TRecord>;
 
-    (object: DbRecord<ResolveTableType<TRecord>>): AdonisQueryBuilder<TRecord>;
+    (object: DbRecord<ResolveTableType<TRecord>>): AdonisQueryBuilder<TModel, TRecord>;
 
-    (object: Readonly<Object>): AdonisQueryBuilder<TRecord>;
+    (object: Readonly<Object>): AdonisQueryBuilder<TModel, TRecord>;
 
     <T extends keyof ResolveTableType<TRecord>>(
       columnName: T,
       value: DbColumn<ResolveTableType<TRecord>[T]> | null
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
-    (columnName: string, value: Value | null): AdonisQueryBuilder<TRecord>;
+    (columnName: string, value: Value | null): AdonisQueryBuilder<TModel, TRecord>;
 
     <T extends keyof ResolveTableType<TRecord>>(
       columnName: T,
       operator: ComparisonOperator,
       value: DbColumn<ResolveTableType<TRecord>[T]> | null
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
-    (columnName: string, operator: string, value: Value | null): QueryBuilder<
-      TRecord,
-      TResult
-    >;
+    (columnName: string, operator: string, value: Value | null): AdonisQueryBuilder<TModel, TRecord>;
 
     <T extends keyof ResolveTableType<TRecord>, TRecordInner, TResultInner>(
       columnName: T,
       operator: ComparisonOperator,
       value: QueryBuilder<TRecordInner, TResultInner>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     <TRecordInner, TResultInner>(
       columnName: string,
       operator: string,
       value: QueryBuilder<TRecordInner, TResultInner>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
-    (left: Raw, operator: string, right: Value | null): QueryBuilder<
-      TRecord,
-      TResult
-    >;
+    (left: Raw, operator: string, right: Value | null): AdonisQueryBuilder<TModel, TRecord>;
 
     <TRecordInner, TResultInner>(
       left: Raw,
       operator: string,
       right: QueryBuilder<TRecordInner, TResultInner>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface WhereRaw<TRecord = any, TResult = unknown[]>
-    extends RawQueryBuilder<TRecord, TResult> {
-    (condition: boolean): AdonisQueryBuilder<TRecord>;
+  interface WhereRaw<TRecord = any, TResult = unknown[], TModel extends {} = any>
+    extends RawQueryBuilder<TRecord, TResult, TModel> {
+    (condition: boolean): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface WhereWrapped<TRecord = any, TResult = unknown[]> {
-    (callback: QueryCallback<TRecord, TResult>): AdonisQueryBuilder<TRecord>;
+  interface WhereWrapped<TRecord = any, TResult = unknown[], TModel extends {} = any> {
+    (callback: QueryCallback<TRecord, TResult>): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface WhereNull<TRecord = any, TResult = unknown[]> {
-    (columnName: keyof TRecord): AdonisQueryBuilder<TRecord>;
-    (columnName: string): AdonisQueryBuilder<TRecord>;
+  interface WhereNull<TRecord = any, TResult = unknown[], TModel extends {} = any> {
+    (columnName: keyof TRecord): AdonisQueryBuilder<TModel, TRecord>;
+    (columnName: string): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface WhereBetween<TRecord = any, TResult = unknown[]> {
+  interface WhereBetween<TRecord = any, TResult = unknown[], TModel extends {} = any> {
     <K extends keyof TRecord>(
       columnName: K,
       range: readonly [DbColumn<TRecord[K]>, DbColumn<TRecord[K]>]
-    ): AdonisQueryBuilder<TRecord>;
-    (columnName: string, range: readonly [Value, Value]): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
+    (columnName: string, range: readonly [Value, Value]): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   interface WhereExists<TRecord = any, TResult = unknown[]> {
-    (callback: QueryCallback<TRecord, TResult>): AdonisQueryBuilder<TRecord>;
+    (callback: QueryCallback<TRecord, TResult>): AdonisQueryBuilder<TModel, TRecord>;
     <TRecordInner, TResultInner>(
       query: QueryBuilder<TRecordInner, TResultInner>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface WhereIn<TRecord = any, TResult = unknown[]> {
+  interface WhereIn<TRecord = any, TResult = unknown[], TModel extends {} = any> {
     <K extends keyof ResolveTableType<TRecord>>(
       columnName: K,
       values: readonly DbColumn<ResolveTableType<TRecord>[K]>[] | QueryCallback
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     (columnName: string, values: readonly Value[] | QueryCallback): QueryBuilder<
       TRecord,
-      TResult
+      TResult,
+      TModel
     >;
     <K extends keyof ResolveTableType<TRecord>>(
       columnNames: readonly K[],
       values: readonly (readonly DbColumn<ResolveTableType<TRecord>[K]>[])[] | QueryCallback
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     (columnNames: readonly string[], values: readonly Value[][] | QueryCallback): QueryBuilder<
       TRecord,
-      TResult
+      TResult,
+      TModel
     >;
     <K extends keyof TRecord, TRecordInner, TResultInner>(
       columnName: K,
       values: QueryBuilder<TRecordInner, TRecord[K]>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <TRecordInner, TResultInner>(
       columnName: string,
       values: Value[] | QueryBuilder<TRecordInner, TResultInner>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <K extends keyof TRecord, TRecordInner, TResultInner>(
       columnNames: readonly K[],
       values: QueryBuilder<TRecordInner, TRecord[K]>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <TRecordInner, TResultInner>(
       columnNames: readonly string[],
       values: QueryBuilder<TRecordInner, TResultInner>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   // Note: Attempting to unify AsymmetricAggregation & TypePreservingAggregation
   // by extracting out a common base interface will not work because order of overloads
   // is significant.
 
-  interface AsymmetricAggregation<TRecord = any, TResult = unknown[], TValue = any> {
+  interface AsymmetricAggregation<TRecord = any, TResult = unknown[], TValue = any, TModel extends {} = any> {
     <TResult2 = AggregationQueryResult<TResult, Dict<TValue>>>(
       ...columnNames: readonly (keyof ResolveTableType<TRecord>)[]
-    ): QueryBuilder<TRecord, TResult2>;
+    ): QueryBuilder<TRecord, TResult2, TModel>;
     <
       TAliases extends {} = Record<string, string | string[] | Knex.Raw>,
       TResult2 = AggregationQueryResult<TResult, {[k in keyof TAliases]?: TValue}>
-    >(aliases: TAliases): QueryBuilder<TRecord, TResult2>;
+    >(aliases: TAliases): QueryBuilder<TRecord, TResult2, TModel>;
     <TResult2 = AggregationQueryResult<TResult, Dict<TValue>>>(
       ...columnNames: ReadonlyArray<Readonly<Record<string, string | string[] | Knex.Raw>> | Knex.Raw | string>
-    ): QueryBuilder<TRecord, TResult2>;
+    ): QueryBuilder<TRecord, TResult2, TModel>;
   }
 
-  interface TypePreservingAggregation<TRecord = any, TResult = unknown[], TValue = any> {
+  interface TypePreservingAggregation<TRecord = any, TResult = unknown[], TValue = any, TModel extends {} = any> {
     <
       TKey extends keyof ResolveTableType<TRecord>,
       TResult2 = AggregationQueryResult<TResult, Dict<ResolveTableType<TRecord>[TKey]>>
     >(
       ...columnNames: readonly TKey[]
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     <
       TAliases extends {} = Readonly<Record<string, string | string[] | Knex.Raw>>,
       TResult2 = AggregationQueryResult<TResult, {
@@ -1358,22 +1376,19 @@ declare namespace Knex {
           TRecord[K] :
           TValue
       }>
-    >(aliases: TAliases): AdonisQueryBuilder<TRecord>;
+    >(aliases: TAliases): AdonisQueryBuilder<TModel, TRecord>;
     <TResult2 = AggregationQueryResult<TResult, Dict<TValue>>>(
       ...columnNames: ReadonlyArray<Readonly<Record<string, string | readonly string[] | Knex.Raw>> | Knex.Raw | string>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface GroupBy<TRecord = any, TResult = unknown[]>
+  interface GroupBy<TRecord = any, TResult = unknown[], TModel extends {} = any>
     extends RawQueryBuilder<TRecord, TResult>,
       ColumnNameQueryBuilder<TRecord, TResult> {}
 
-  interface OrderBy<TRecord = any, TResult = unknown[]> {
-    (columnName: keyof TRecord | QueryBuilder, order?: 'asc' | 'desc'): QueryBuilder<
-      TRecord,
-      TResult
-    >;
-    (columnName: string | QueryBuilder, order?: string): AdonisQueryBuilder<TRecord>;
+  interface OrderBy<TRecord = any, TResult = unknown[], TModel extends {} = any> {
+    (columnName: keyof TRecord | QueryBuilder, order?: 'asc' | 'desc'): AdonisQueryBuilder<TModel, TRecord>;
+    (columnName: string | QueryBuilder, order?: string): AdonisQueryBuilder<TModel, TRecord>;
     (
       columnDefs: Array<
         keyof TRecord | Readonly<{
@@ -1381,65 +1396,67 @@ declare namespace Knex {
           order?: 'asc' | 'desc'
         }>
       >
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     (
       columnDefs: Array<string | Readonly<{
         column: string | QueryBuilder;
         order?: string;
       }>>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface Intersect<TRecord = any, TResult = unknown[]> {
+  interface Intersect<TRecord = any, TResult = unknown[], TModel extends {} = any> {
     (
       callback: MaybeArray<QueryCallback | QueryBuilder<TRecord> | Raw>,
       wrap?: boolean
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     (
       ...callbacks: readonly (QueryCallback | Raw | QueryBuilder<TRecord>)[]
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface Union<TRecord = any, TResult = unknown[]>
+  interface Union<TRecord = any, TResult = unknown[], TModel extends {} = any>
     extends Intersect<TRecord, TResult> {}
 
-  interface Having<TRecord = any, TResult = unknown[]>
+  interface Having<TRecord = any, TResult = unknown[], TModel extends {} = any>
     extends WhereWrapped<TRecord, TResult> {
     <K extends keyof TRecord>(
       column: K,
       operator: ComparisonOperator,
       value: DbColumn<TRecord[K]>
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     (
       column: string | Raw,
       operator: string,
       value: Value | QueryBuilder | null
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     (raw: Raw): QueryBuilder<
       TRecord,
-      TResult
+      TResult,
+      TModel
     >;
   }
 
-  interface HavingRange<TRecord = any, TResult = unknown[]> {
+  interface HavingRange<TRecord = any, TResult = unknown[], TModel extends {} = any> {
     <K extends keyof TRecord>(
       columnName: K,
       values: readonly DbColumn<TRecord[K]>[]
-    ): AdonisQueryBuilder<TRecord>;
-    (columnName: string, values: readonly Value[]): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
+    (columnName: string, values: readonly Value[]): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   // commons
 
-  interface ColumnNameQueryBuilder<TRecord = any, TResult = unknown[]> {
+  interface ColumnNameQueryBuilder<TRecord = any, TResult = unknown[], TModel extends {} = any> {
     // When all columns are known to be keys of original record,
     // we can extend our selection by these columns
-    (columnName: '*'): QueryBuilder<
-      TRecord,
-      ArrayIfAlready<TResult, DeferredKeySelection<TRecord, string>>
-    >;
+    (columnName: '*'): AdonisQueryBuilder<TModel, TRecord>;
+    // (columnName: '*'): QueryBuilder<
+    //   TRecord,
+    //   ArrayIfAlready<TResult, DeferredKeySelection<TRecord, string>>
+    // >;
 
     <
       ColNameUT extends keyof ResolveTableType<TRecord>,
@@ -1450,7 +1467,8 @@ declare namespace Knex {
       >[]
     >(
       ...columnNames: readonly ColNameUT[]
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     <
       ColNameUT extends keyof ResolveTableType<TRecord>,
@@ -1461,7 +1479,8 @@ declare namespace Knex {
       >[]
     >(
       columnNames: readonly ColNameUT[]
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     // For non-inferrable column selection, we will allow consumer to
     // specify result type and if not widen the result to entire record type with any omissions permitted
@@ -1473,7 +1492,8 @@ declare namespace Knex {
       >[]
     >(
       ...columnNames: readonly ColumnDescriptor<TRecord, TResult>[]
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
 
     <
       TResult2 = DeferredKeySelection.Augment<
@@ -1483,20 +1503,26 @@ declare namespace Knex {
       >[]
     >(
       columnNames: readonly ColumnDescriptor<TRecord, TResult>[]
-    ): QueryBuilder<TRecord, TResult2>;
+    // ): QueryBuilder<TRecord, TResult2>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   type RawBinding = Value | QueryBuilder;
 
-  interface RawQueryBuilder<TRecord = any, TResult = unknown[]> {
+  interface RawQueryBuilder<TRecord = any, TResult = unknown[], TModel extends {} = any> {
+    // <TResult2 = TResult>(
+    //   sql: string,
+    //   bindings?: readonly RawBinding[] | ValueDict | RawBinding
+    // ): QueryBuilder<TRecord, TResult2>;
+    // <TResult2 = TResult>(raw: Raw<TResult2>): QueryBuilder<
+    //   TRecord,
+    //   TResult2
+    // >;
     <TResult2 = TResult>(
       sql: string,
       bindings?: readonly RawBinding[] | ValueDict | RawBinding
-    ): QueryBuilder<TRecord, TResult2>;
-    <TResult2 = TResult>(raw: Raw<TResult2>): QueryBuilder<
-      TRecord,
-      TResult2
-    >;
+    ): AdonisQueryBuilder<TModel, TRecord>;
+    <TResult2 = TResult>(raw: Raw<TResult2>): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   // Raw
@@ -1590,36 +1616,37 @@ declare namespace Knex {
   interface QueryBuilder<
     TRecord extends {} = any,
     TResult = any,
+    TModel extends {} = any
   >
-    extends QueryInterface<TRecord, TResult>,
+    extends QueryInterface<TRecord, TResult, TModel>,
       ChainableInterface<ResolveResult<TResult>>  {
     client: Client;
-    or: AdonisQueryBuilder<TRecord>;
+    or: AdonisQueryBuilder<TModel, TRecord>;
     // or: QueryBuilder<TRecord, TResult>;
-    not: AdonisQueryBuilder<TRecord>;
-    and: AdonisQueryBuilder<TRecord>;
+    not: AdonisQueryBuilder<TModel, TRecord>;
+    and: AdonisQueryBuilder<TModel, TRecord>;
 
     // TODO: Promise?
     columnInfo(column?: keyof TRecord): Promise<ColumnInfo>;
 
-    forUpdate(...tableNames: string[]): AdonisQueryBuilder<TRecord>;
-    forUpdate(tableNames: readonly string[]): AdonisQueryBuilder<TRecord>;
+    forUpdate(...tableNames: string[]): AdonisQueryBuilder<TModel, TRecord>;
+    forUpdate(tableNames: readonly string[]): AdonisQueryBuilder<TModel, TRecord>;
 
-    forShare(...tableNames: string[]): AdonisQueryBuilder<TRecord>;
-    forShare(tableNames: readonly string[]): AdonisQueryBuilder<TRecord>;
+    forShare(...tableNames: string[]): AdonisQueryBuilder<TModel, TRecord>;
+    forShare(tableNames: readonly string[]): AdonisQueryBuilder<TModel, TRecord>;
 
-    skipLocked(): AdonisQueryBuilder<TRecord>;
-    noWait(): AdonisQueryBuilder<TRecord>;
+    skipLocked(): AdonisQueryBuilder<TModel, TRecord>;
+    noWait(): AdonisQueryBuilder<TModel, TRecord>;
 
     toSQL(): Sql;
 
-    on(event: string, callback: Function): AdonisQueryBuilder<TRecord>;
+    on(event: string, callback: Function): AdonisQueryBuilder<TModel, TRecord>;
 
-    queryContext(context: any): AdonisQueryBuilder<TRecord>;
+    queryContext(context: any): AdonisQueryBuilder<TModel, TRecord>;
     queryContext(): any;
 
-    clone(): AdonisQueryBuilder<TRecord>;
-    timeout(ms: number, options?: {cancel?: boolean}): AdonisQueryBuilder<TRecord>;
+    clone(): AdonisQueryBuilder<TModel, TRecord>;
+    timeout(ms: number, options?: {cancel?: boolean}): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   interface Sql {
@@ -1666,7 +1693,7 @@ declare namespace Knex {
     asCallback(callback: Function): Promise<T>;
   }
 
-  interface Transaction<TRecord extends {} = any, TResult = any>
+  interface Transaction<TRecord extends {} = any, TResult = any, TModel extends {} = any>
     extends Knex<TRecord, TResult> {
     executionPromise: Promise<TResult>;
     isCompleted: () => boolean;
@@ -1676,12 +1703,12 @@ declare namespace Knex {
       sql: any,
       status: any,
       value: any
-    ): AdonisQueryBuilder<TRecord>;
+    ): AdonisQueryBuilder<TModel, TRecord>;
     savepoint<T = any>(
       transactionScope: (trx: Transaction) => any
     ): Promise<T>;
-    commit(value?: any): AdonisQueryBuilder<TRecord>;
-    rollback(error?: any): AdonisQueryBuilder<TRecord>;
+    commit(value?: any): AdonisQueryBuilder<TModel, TRecord>;
+    rollback(error?: any): AdonisQueryBuilder<TModel, TRecord>;
   }
 
   //
@@ -2263,7 +2290,7 @@ export = Knex;
 
 // import { ConnectionOptions } from "tls";
 // import { Stream } from "stream";
-// // import AdonisQueryBuilder<TRecord> from 'Types/Lucid/Lucid/QueryBuilder'
+// // import AdonisQueryBuilder<TModel, TRecord> from 'Types/Lucid/Lucid/QueryBuilder'
 
 // // # Generic type-level utilities
 

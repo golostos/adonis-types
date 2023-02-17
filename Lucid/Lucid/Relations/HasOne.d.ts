@@ -1,4 +1,5 @@
 export = HasOne;
+import Model from '../Model'
 /**
  * The HasOne relationship defines a relation between
  * two models
@@ -6,7 +7,7 @@ export = HasOne;
  * @class HasOne
  * @constructor
  */
-declare class HasOne<TModel> extends BaseRelation<TModel> {
+declare class HasOne<TModel extends Model> extends BaseRelation<TModel> {
     /**
      * Persists the parent model instance if it's not
      * persisted already. This is done before saving
@@ -52,7 +53,7 @@ declare class HasOne<TModel> extends BaseRelation<TModel> {
      *
      * @return {Model}
      */
-    fetch(): Model;
+    fetch(): Promise<TModel | null>;
     /**
      * Adds a where clause to limit the select search
      * to related rows only.

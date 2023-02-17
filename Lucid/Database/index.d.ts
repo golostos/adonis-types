@@ -1,4 +1,8 @@
 export = Database;
+import type knex from '../../knex';
+interface KnexQueryBuilder<TRecord extends {} = any, TResult = any> extends Omit<knex.QueryBuilder<TRecord, TResult>, 'on'> { }
+declare class KnexQueryBuilder<TRecord extends {} = any, TResult = any> { }
+type Spread = any
 /**
  * The database class is a reference to knex for a single
  * connection. It has couple of extra methods over knex.
@@ -10,7 +14,7 @@ export = Database;
  * @constructor
  * @group Database
  */
-declare class Database {
+declare class Database extends KnexQueryBuilder {
     constructor(config: any);
     connectionClient: any;
     knex: knex<any, unknown[]>;
@@ -54,7 +58,7 @@ declare class Database {
      *
      * @return {Object}
      */
-    get schema(): any;
+    get schema(): knex.SchemaBuilder;
     /**
      * Returns the fn from knex instance
      *
@@ -96,7 +100,7 @@ declare class Database {
      *   .insert({ username: 'virk' })
      * ```
      */
-    beginTransaction(): any;
+    beginTransaction(): Promise<knex.Transaction<any, any>>;
     /**
      * Run a callback inside a transaction
      *
@@ -143,7 +147,7 @@ declare class Database {
      *
      * @return {Object}
      */
-    query(): any;
+    query(): KnexQueryBuilder;
     /**
      * Closes the database connection. No more queries
      * can be made after this.
@@ -154,5 +158,5 @@ declare class Database {
      */
     close(): Promise<any>;
 }
-import knex = require("knex");
+// import knex = require("knex");
 //# sourceMappingURL=index.d.ts.map

@@ -10,7 +10,7 @@ type Mixed = any
  * @class BaseRelation
  * @constructor
  */
-declare class BaseRelation<TModel> extends knex.QueryBuilder<TModel> {
+declare class BaseRelation<TModel extends Model> extends knex.QueryBuilder<TModel["_prismaModel"], any, TModel> {
     constructor(parentInstance: Model, RelatedModel: Model, primaryKey: string, foreignKey: string)
     // constructor(parentInstance: any, RelatedModel: any, primaryKey: any, foreignKey: any);
     parentInstance: any;

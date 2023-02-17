@@ -1,6 +1,7 @@
 export = BaseModel;
-
+import Model from '.';
 import VanillaSerializer from '../Serializers/Vanilla';
+type Moment = any
 /**
  * The base model to share attributes with Lucid
  * model and the Pivot model.
@@ -52,7 +53,7 @@ declare class BaseModel {
      *
      * @return {VanillaSerializer}
      */
-    static get Serializer(): VanillaSerializer;
+    static get Serializer(): VanillaSerializer<Model>;
     /**
      * The database connection to be used for
      * the model. Returning blank string will
@@ -92,7 +93,7 @@ declare class BaseModel {
      *
      * @returns {VanillaSerializer}
      */
-    static resolveSerializer(): VanillaSerializer;
+    static resolveSerializer(): VanillaSerializer<Model>;
     /**
      * This method is executed when toJSON is called on a
      * model or collection of models. The value received

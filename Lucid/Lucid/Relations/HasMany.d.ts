@@ -7,7 +7,7 @@ export = HasMany;
  * @class HasMany
  * @constructor
  */
-declare class HasMany<TModel> extends BaseRelation<TModel> {
+declare class HasMany<TModel extends Model> extends BaseRelation<TModel> {
     /**
      * Persists the parent model instance if it's not
      * persisted already. This is done before saving
@@ -112,5 +112,6 @@ declare class HasMany<TModel> extends BaseRelation<TModel> {
      */
     saveMany(arrayOfRelatedInstances: any[], trx?: any): any[];
 }
+import Model = require('../Model');
 import BaseRelation = require("./BaseRelation");
 //# sourceMappingURL=HasMany.d.ts.map

@@ -7,6 +7,8 @@ type Collection<T> = Promise<Serializer<T>>
 type Constructor<T> = { new(): T }
 type Mixed = any
 
+type ReturnTypeOfMethod<T, K extends keyof T> = ReturnType<T[K]>
+
 /**
  * Lucid model is a base model and supposed to be
  * extended by other models.
@@ -17,7 +19,7 @@ type Mixed = any
  *
  * @class Model
  */
-declare class Model extends BaseModel {
+declare class Model<TRecord = any> extends BaseModel {
     /**
      * Boot model if not booted. This method is supposed
      * to be executed via IoC container hooks.
@@ -123,9 +125,11 @@ declare class Model extends BaseModel {
      *
      * @static
      */
-    static query<T>(this: Constructor<T>): QueryBuilder<T>;
-    // static query<T>(): QueryBuilder;
-    // static create<T>(this: Constructor<T>, payload: any, trx?: any): T
+    static query<T extends Model>(this: Constructor<T>): QueryBuilder<T, T['_prismaModel']>;
+    /**
+     * This field is only for typing purposes. Does not work in JS
+     */
+    _prismaModel: TRecord;
     /**
      * Returns a query builder without any global scopes
      *
@@ -133,7 +137,7 @@ declare class Model extends BaseModel {
      *
      * @return {QueryBuilder}
      */
-    static queryWithOutScopes<T>(this: Constructor<T>): QueryBuilder<T>;
+    static queryWithOutScopes<T extends Model>(this: Constructor<T>): QueryBuilder<T, T['_prismaModel']>;
     /**
      * Define a query macro to be added to query builder.
      *
@@ -734,6 +738,7 @@ declare class Model extends BaseModel {
      * @return {Object}
      */
     getRelated(key: string): any;
+    // getRelated<T>(this: T, key: keyof T): ReturnType<T[typeof key]>;
     /**
      * Loads relationships and set them as $relations
      * attribute.

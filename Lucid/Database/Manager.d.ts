@@ -22,7 +22,7 @@ export = DatabaseManager;
  *
  * @class DatabaseManager
  */
-declare class DatabaseManager {
+declare class DatabaseManager extends Database {
     constructor(Config: any);
     Config: any;
     _connectionPools: {};
@@ -69,5 +69,5 @@ declare class DatabaseManager {
      */
     close(names?: string | any[]): void;
 }
-import Database = require("@adonisjs/lucid/src/Database");
+import Database = require(".");
 //# sourceMappingURL=Manager.d.ts.map
