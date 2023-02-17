@@ -1383,8 +1383,8 @@ declare namespace Knex {
   }
 
   interface GroupBy<TRecord = any, TResult = unknown[], TModel extends {} = any>
-    extends RawQueryBuilder<TRecord, TResult>,
-      ColumnNameQueryBuilder<TRecord, TResult> {}
+    extends RawQueryBuilder<TRecord, TResult, TModel>,
+    ColumnNameQueryBuilder<TRecord, TResult, TModel> {}
 
   interface OrderBy<TRecord = any, TResult = unknown[], TModel extends {} = any> {
     (columnName: keyof TRecord | QueryBuilder, order?: 'asc' | 'desc'): AdonisQueryBuilder<TModel, TRecord>;

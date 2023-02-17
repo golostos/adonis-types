@@ -1,7 +1,11 @@
 export = BaseRelation;
 import Model from '../Model'
 import type knex from '../../../knex';
+import QueryBuilder from '../QueryBuilder';
 type Mixed = any
+
+interface AdonisQueryBuilder<TModel extends {}, TRecord = any> extends Omit<QueryBuilder<TModel, TRecord>, 'fetch' | 'ids'> { }
+declare class AdonisQueryBuilder<TModel extends {}, TRecord extends {}> { }
 /**
  * Base relation is supposed to be extended by other
  * relations. It takes care of commonly required
@@ -10,7 +14,7 @@ type Mixed = any
  * @class BaseRelation
  * @constructor
  */
-declare class BaseRelation<TModel extends Model> extends knex.QueryBuilder<TModel["_prismaModel"], any, TModel> {
+declare class BaseRelation<TModel extends Model> extends AdonisQueryBuilder<TModel, TModel["_prismaModel"]> {
     constructor(parentInstance: Model, RelatedModel: Model, primaryKey: string, foreignKey: string)
     // constructor(parentInstance: any, RelatedModel: any, primaryKey: any, foreignKey: any);
     parentInstance: any;
