@@ -513,7 +513,7 @@ declare class Model<TRecord = any> extends BaseModel {
      *
      * @return {Object}
      */
-    get dirty(): any;
+    get dirty(): TRecord;
     /**
      * Tells whether model is dirty or not
      *

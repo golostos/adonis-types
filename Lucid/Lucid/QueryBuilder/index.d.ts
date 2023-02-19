@@ -376,7 +376,7 @@ declare class QueryBuilder<TModel extends {}, TRecord extends {}> extends KnexQu
      *
      * @chainable
      */
-    whereHas(relation: string, callback?: Function, expression?: string, value?: string): QueryBuilder<TModel, TRecord>;
+    whereHas(relation: string, callback?: (builder: QueryBuilder<Model, any>) => void, expression?: string, value?: string): QueryBuilder<TModel, TRecord>;
     /**
      * Same as `whereHas` but with `or` clause
      *

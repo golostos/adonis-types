@@ -10,7 +10,7 @@ export = HashFacade;
  * @class HashFacade
  * @constructor
  */
-declare class HashFacade {
+declare class HashFacade extends Hash {
     constructor(Config: any);
     Config: any;
     _hasherInstances: {};
@@ -26,5 +26,5 @@ declare class HashFacade {
      */
     driver(name: string): Hash;
 }
-import Hash = require("@adonisjs/framework/src/Hash");
+import Hash = require(".");
 //# sourceMappingURL=Facade.d.ts.map

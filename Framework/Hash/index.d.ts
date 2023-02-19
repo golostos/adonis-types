@@ -43,7 +43,7 @@ declare class Hash {
      * const hashed = await Hash.make('my-secret-password')
      * ```
      */
-    make(value: string, config: any): string;
+    make(value: string, config?: any): Promise<string>;
     /**
      * Verify an existing hash with the plain value. Though this
      * method returns a promise, it never rejects the promise
@@ -66,6 +66,6 @@ declare class Hash {
      * }
      * ```
      */
-    verify(value: string, hash: string): boolean;
+    verify(value: string, hash: string): Promise<boolean>;
 }
 //# sourceMappingURL=index.d.ts.map
