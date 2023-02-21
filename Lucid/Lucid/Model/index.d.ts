@@ -209,7 +209,7 @@ declare class Model<TRecord = any> extends BaseModel {
      *
      * @return {this} Model instance is returned
      */
-    static create<T>(this: Constructor<T>, payload: any, trx?: any): T
+    static create<T>(this: Constructor<T>, payload: any, trx?: any): Promise<T>
     // static create(payload: any, trx?: any): this;
     /**
      * Returns the latest row from the database.
@@ -221,7 +221,7 @@ declare class Model<TRecord = any> extends BaseModel {
      *
      * @return {Model|Null}
      */
-    static last<T>(this: Constructor<T>, field?: string): T | null;
+    static last<T>(this: Constructor<T>, field?: string): Promise<T | null>;
     /**
      * Creates many instances of model in parallel.
      *
@@ -234,7 +234,7 @@ declare class Model<TRecord = any> extends BaseModel {
      *
      * @throws {InvalidArgumentException} If payloadArray is not an array
      */
-    static createMany<T>(this: Constructor<T>, payloadArray: any[], trx?: any): T[];
+    static createMany<T>(this: Constructor<T>, payloadArray: any[], trx?: any): Promise<T[]>;
     /**
      * Deletes all rows of this model (truncate table).
      *

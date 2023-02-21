@@ -231,7 +231,7 @@ declare class BelongsToMany<TModel extends Model> extends BaseRelationCustom<TMo
      *
      * @chainable
      */
-    select(columns: any[], ...args: any[]): BelongsToMany<any>;
+    select(columns: any[]): BelongsToMany<any>;
     /**
      * Define a fully qualified model to be used for
      * making pivot table queries and using defining
