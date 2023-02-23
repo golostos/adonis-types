@@ -1,14 +1,22 @@
-export = Logger;
+// export = Logger;
 import WinstonFile from './Drivers/File'
 import WinstonConsole from './Drivers/Console'
 type WinstonDriver = WinstonFile | WinstonConsole
 import winston from 'winston'
 
+export type Meta = {
+    message: string
+    code: string
+    session_id?: string
+    [key: string]: any
+}
+
 interface LogMethod {
     (message: string, callback: winston.LogCallback): void;
     (message: string, meta: any, callback: winston.LogCallback): void;
     (message: string, ...meta: any[]): void;
-    (message: any): void;
+    (message: string, meta: Meta): void;
+    (meta: Meta): void;
 }
 
 /**
@@ -159,3 +167,4 @@ declare class Logger {
     emerg: LogMethod;
 }
 //# sourceMappingURL=index.d.ts.map
+export default Logger

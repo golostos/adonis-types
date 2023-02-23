@@ -11,7 +11,8 @@
     "url": "https://github.com/golostos/adonis-types.git"
   },
   "scripts": {
-    "gen": "tsc ../../node_modules/@adonisjs/fold/src/**/*.js --declaration --declarationMap --allowJs --emitDeclarationOnly --outDir Fold"
+    "gen": "tsc ../../node_modules/@adonisjs/fold/src/**/*.js --declaration --declarationMap --allowJs --emitDeclarationOnly --outDir Fold",
+    "precommit": "npm version patch --no-git-tag-version"
   },
   "dependencies": {
     "@types/jscodeshift": "^0.11.6",

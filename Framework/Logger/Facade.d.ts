@@ -1,4 +1,6 @@
 export = LoggerFacade;
+import Logger from "./index";
+declare type TransportName = "file" | "console" | "loki" | "ap" | "task"
 /**
  * LoggerFacade is exposed by IoC container and it proxy
  * methods over @ref('Logger') class.
@@ -20,11 +22,11 @@ declare class LoggerFacade extends Logger {
      *
      * @method transport
      *
-     * @param  {String}  name
+     * @param  {TransportName}  name
      *
      * @return {Logger}
      */
-    transport(name: string): Logger;
+    transport(name: TransportName): Logger;
 }
-import Logger = require("./index");
+
 //# sourceMappingURL=Facade.d.ts.map
