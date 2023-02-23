@@ -12,17 +12,20 @@
   },
   "scripts": {
     "gen": "tsc ../../node_modules/@adonisjs/fold/src/**/*.js --declaration --declarationMap --allowJs --emitDeclarationOnly --outDir Fold",
-    "precommit": "npm version patch --no-git-tag-version"
+    "precommit": "npm version patch --no-git-tag-version",
+    "postcommit": "npm publish",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/jscodeshift": "^0.11.6",
     "jscodeshift": "^0.14.0",
+    "pify": "^4.0.0",
     "pluralize": "^8.0.0",
-    "tarn": "^3.0.1",
-    "pify": "^4.0.0"
+    "tarn": "^3.0.1"
   },
   "devDependencies": {
-    "@types/pluralize": "^0.0.29"
+    "@types/pluralize": "^0.0.29",
+    "husky": "^8.0.3"
   },
   "author": "Alexander Dmitriev",
   "license": "MIT"
