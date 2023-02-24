@@ -1,7 +1,9 @@
 import Command from '../Command'
+// @ts-ignore
 import Enquirer from 'enquirer'
 // export = kernel;
 declare const kernel: Kernel;
+type Mixed = any;
 export default kernel;
 /**
  * An Instance of kernel is exported as the
@@ -117,7 +119,7 @@ declare class Kernel {
      * ace.addCommand(Greet)
      * ```
      */
-    addCommand(command: Class | string): void;
+    addCommand(command: Command | string): void;
     /**
      * Add a new inline command by defining a signature
      * description and a closure to be executed when
@@ -161,7 +163,7 @@ declare class Kernel {
      *
      * @return {Class}
      */
-    getCommand(name: string): Class;
+    getCommand(name: string): Command;
     /**
      * Executes the command using it's name.
      *

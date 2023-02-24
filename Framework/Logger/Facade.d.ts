@@ -1,6 +1,6 @@
 export = LoggerFacade;
-import Logger from "./index";
-declare type TransportName = "file" | "console" | "loki" | "ap" | "task"
+import Logger, { TransportName } from "./index";
+
 /**
  * LoggerFacade is exposed by IoC container and it proxy
  * methods over @ref('Logger') class.

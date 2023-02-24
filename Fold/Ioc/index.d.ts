@@ -1,4 +1,5 @@
 export = Ioc;
+type Mixed = any;
 /**
  * Ioc container instance is used to register and fetch dependencies without
  * dealing with system paths. Also dependencies can be dependent upon each
@@ -482,7 +483,7 @@ declare class Ioc {
      * Ioc.restore() // restore all
      * ```
      */
-    restore(...namespaces: (Spread | any[])[]): void;
+    restore(...namespaces: (any[])[]): void;
     /**
      * Attempts to resolve a namespace in following order.
      *

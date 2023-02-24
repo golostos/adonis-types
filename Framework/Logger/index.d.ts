@@ -3,9 +3,11 @@ import WinstonFile from './Drivers/File'
 import WinstonConsole from './Drivers/Console'
 type WinstonDriver = WinstonFile | WinstonConsole
 import winston from 'winston'
+export declare type TransportName = "file" | "console" | "loki" | "ap" | "task" | "lokiErrors"
 
 export type Meta = {
     message: string
+    group: string
     code: string
     session_id?: string
     [key: string]: any

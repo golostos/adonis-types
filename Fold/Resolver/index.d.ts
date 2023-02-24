@@ -1,4 +1,5 @@
 export = Resolver;
+type Mixed = any;
 /**
  * This class will resolve a namespace or a pattern
  * from the IoC container. Think of it as a friend

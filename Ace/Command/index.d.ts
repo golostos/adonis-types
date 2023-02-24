@@ -1,4 +1,6 @@
 export = Command;
+type Spread = any;
+type Mixed = any;
 /**
  * The base command is supposed to be extended by
  * every other command to work properly.
@@ -541,9 +543,9 @@ declare class Command {
      *
      * @param  {String}  dir
      *
-     * @return {Promsie}
+     * @return {Promise}
      */
-    removeDir(dir: string): Promsie;
+    removeDir(dir: string): Promise<void>;
     /**
      * Copy file from src directory to destination
      *
