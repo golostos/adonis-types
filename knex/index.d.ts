@@ -1028,8 +1028,8 @@ declare namespace Knex {
     ): AdonisQueryBuilder<TModel, TRecord>;
   }
 
-  interface Distinct<TRecord extends {}, TResult = {}[]>
-    extends ColumnNameQueryBuilder<TRecord, TResult> {}
+  interface Distinct<TRecord extends {}, TResult = {}[], TModel extends {} = any>
+    extends ColumnNameQueryBuilder<TRecord, TResult, TModel> {}
 
   interface DistinctOn<TRecord extends {}, TResult = {}[], TModel extends {} = any> {
     <ColNameUT extends keyof TRecord>(

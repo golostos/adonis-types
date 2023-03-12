@@ -1,6 +1,6 @@
 {
   "name": "adonis-types",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "Types for AdonisJS 4.1",
   "main": "index.js",
   "publishConfig": {
@@ -13,8 +13,7 @@
   "scripts": {
     "gen": "tsc ../../node_modules/@adonisjs/fold/src/**/*.js --declaration --declarationMap --allowJs --emitDeclarationOnly --outDir Fold",
     "precommit": "npm version patch --no-git-tag-version && git add package.json",
-    "postcommit": "npm publish",
-    "prepare": "husky install"
+    "postcommit": "npm publish"
   },
   "dependencies": {
     "@types/jscodeshift": "^0.11.6",

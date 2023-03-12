@@ -230,7 +230,7 @@ declare class QueryBuilder<TModel extends {}, TRecord extends {}> extends KnexQu
      *
      * @return {Array}
      */
-    insert(attributes: any): Promise<any[]>;
+    insert(attributes: Partial<TRecord>): Promise<any[]>;
     /**
      * Bulk update data from query builder. This method will also
      * format all dates and set `updated_at` column
@@ -242,7 +242,7 @@ declare class QueryBuilder<TModel extends {}, TRecord extends {}> extends KnexQu
      *
      * @return {Promise}
      */
-    update(valuesOrModelInstance: any | Model): Promise<any>;
+    update(valuesOrModelInstance: Partial<TRecord> | TModel): Promise<any>;
     /**
      * Deletes the rows from the database.
      *

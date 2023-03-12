@@ -105,7 +105,7 @@ declare class Repository {
      * @param   {mixed}   value
      * @return  {void}
      */
-    forever(key: string, value: mixed): void;
+    forever(key: string, value: mixed): Promise<void>;
     /**
      * Get an item from the cache, or store the default value.
      *

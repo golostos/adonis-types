@@ -6,10 +6,27 @@ import winston from 'winston'
 export declare type TransportName = "file" | "console" | "loki" | "ap" | "task" | "lokiErrors"
 
 export type Meta = {
+    /** Message text */
     message: string
+    /** Name of the file, class or module in which this log message is created */
     group: string
+    /** Code of the log - can be a method name or a logical role */
     code: string
+    /** request_id for the entire user request processing flow 
+     * or a unique id for a large task or command */
+    request_id?: string
+    /** session_id from Autopayer FastAPI */
     session_id?: string
+    /** Operation group name. The name of a large group of operations, 
+     * such as a full stream of request handlers or commands that perform some task */
+    opsGroupName?: string
+    /** Name of the method or function in which the log is called */
+    method?: string
+    /** The url of request to WB or Autopayer FastAPI */
+    url?: string
+    /** Serialized error message */
+    error?: any
+    /** Any additional fields are allowed */
     [key: string]: any
 }
 
