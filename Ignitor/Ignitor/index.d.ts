@@ -384,7 +384,7 @@ declare class Ignitor {
      *
      * @throws {Error} If app root has not be defined
      */
-    fire(): void;
+    fire(): Promise<any>;
     /**
      * This method will instruct ignitor to run
      * the websocket server along with the
@@ -396,7 +396,7 @@ declare class Ignitor {
      *
      * @chainable
      */
-    wsServer(httpServer?: Http.Server): Ignitor;
+    wsServer(httpServer?: any): Ignitor;
     /**
      * Starts the Adonis http server.
      *
@@ -416,3 +416,4 @@ declare class Ignitor {
      */
     fireAce(): void;
 }
+//# sourceMappingURL=index.d.ts.map

@@ -162,3 +162,4 @@ declare class Helpers {
      */
     isAceCommand(): boolean;
 }
+//# sourceMappingURL=index.d.ts.map
