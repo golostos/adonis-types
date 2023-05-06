@@ -1,6 +1,6 @@
 {
   "name": "adonis-types",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "description": "Types for AdonisJS 4.1",
   "main": "index.js",
   "publishConfig": {
@@ -11,7 +11,7 @@
     "url": "https://github.com/golostos/adonis-types.git"
   },
   "scripts": {
-    "gen": "tsc ../../node_modules/@adonisjs/ignitor/src/**/*.js --declaration --declarationMap --allowJs --emitDeclarationOnly --outDir Ignitor",
+    "gen": "tsc ../../node_modules/@adonisjs/auth/src/**/*.js --declaration --declarationMap --allowJs --emitDeclarationOnly --outDir Auth",
     "precommit": "npm version patch --no-git-tag-version && git add package.json",
     "postcommit": "npm publish"
   },

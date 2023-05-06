@@ -88,7 +88,7 @@ declare class HasMany<TModel extends Model> extends BaseRelation<TModel> {
      *
      * @return {Promise}
      */
-    create(payload: any, trx?: any): Promise<any>;
+    create(payload: any, trx?: any): Promise<TModel>;
     /**
      * Creates an array of model instances in parallel
      *
@@ -99,7 +99,7 @@ declare class HasMany<TModel extends Model> extends BaseRelation<TModel> {
      *
      * @return {Array}
      */
-    createMany(arrayOfPayload: any[], trx?: any): any[];
+    createMany(arrayOfPayload: any[], trx?: any): Promise<TModel[]>;
     /**
      * Creates an array of model instances in parallel
      *
@@ -110,7 +110,7 @@ declare class HasMany<TModel extends Model> extends BaseRelation<TModel> {
      *
      * @return {Array}
      */
-    saveMany(arrayOfRelatedInstances: any[], trx?: any): any[];
+    saveMany(arrayOfRelatedInstances: any[], trx?: any): Promise<any[]>;
 }
 import Model = require('../Model');
 import BaseRelation = require("./BaseRelation");
