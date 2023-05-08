@@ -7,7 +7,15 @@ import SessionScheme from "../Schemes/Session";
 import BasicScheme from "../Schemes/BasicAuth";
 import ApiScheme from "../Schemes/Api";
 
-type Scheme<Schema, UserModel> = Schema extends 'jwt' ? JwtScheme<UserModel> :
+type SchemeTypes<UserModel> = {
+    jwt: JwtScheme<UserModel>;
+    session: SessionScheme<UserModel>;
+    basic: BasicScheme<UserModel>;
+    api: ApiScheme<UserModel>;
+};
+
+
+type Scheme<Schema extends SchemaName, UserModel> = Schema extends 'jwt' ? JwtScheme<UserModel> :
     Schema extends 'session' ? SessionScheme<UserModel> :
     Schema extends 'basic' ? BasicScheme<UserModel> :
     Schema extends 'api' ? ApiScheme<UserModel> :
@@ -31,9 +39,13 @@ type BaseUserModels = {
     [key: string]: Model
 }
 
-type AuthenticatorInstances<AC extends BaseAuthConfig, UM extends BaseUserModels> = {
-    [K in keyof AC]: Scheme<AC[K]['scheme'], UM[AC[K]['model']]>;
+type AuthenticatorInstances<AC extends BaseAuthConfig, UM extends BaseUserModels, TSchema extends SchemaName> = {
+    [K in keyof AC]: Scheme<TSchema, UM[AC[K]['model']]>;
 };
+// type AuthenticatorInstances<AC extends BaseAuthConfig, UM extends BaseUserModels> = {
+//     [K in keyof AC]: SchemeTypes<UM[AC[K]['model']]>[AC[K]['scheme']];
+// };
+
 
 /**
  * The auth class is used to authenticate users using a pre-defined
@@ -49,7 +61,7 @@ type AuthenticatorInstances<AC extends BaseAuthConfig, UM extends BaseUserModels
  * @param {Context} ctx     Request context
  * @param {Config}  Config  Reference to config provider
  */
-declare class Auth<AuthName extends string, AuthConfig extends BaseAuthConfig, UserModels extends BaseUserModels> {
+declare class Auth<AuthName extends string, AuthConfig extends BaseAuthConfig, UserModels extends BaseUserModels, TSchema extends SchemaName> {
     constructor(ctx: any, Config: any);
     _ctx: any;
     Config: any;
@@ -65,6 +77,7 @@ declare class Auth<AuthName extends string, AuthConfig extends BaseAuthConfig, U
      *
      * @return {Scheme}
      */
-    authenticator<TAuthName extends AuthName>(name: TAuthName): AuthenticatorInstances<AuthConfig, UserModels>[TAuthName];
+    authenticator<TAuthName extends AuthName>(name: TAuthName): AuthenticatorInstances<AuthConfig, UserModels, TSchema>[TAuthName];
+    // authenticator<TAuthName extends AuthName>(name: TAuthName): AuthenticatorInstances<AuthConfig, UserModels>[TAuthName];
 }
 //# sourceMappingURL=index.d.ts.map

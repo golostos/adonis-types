@@ -6,7 +6,7 @@ export = BaseTokenScheme;
  * @constructor
  * @param {Encryption} Encryption
  */
-declare class BaseTokenScheme extends BaseScheme {
+declare class BaseTokenScheme<UserModel> extends BaseScheme<UserModel> {
     /**
      * IoC container injections
      *
@@ -74,7 +74,7 @@ declare class BaseTokenScheme extends BaseScheme {
      * await auth.revokeTokensForUser(user, null, true)
      * ```
      */
-    revokeTokensForUser(user: User | any, tokens?: any[], deleteInstead?: boolean): number;
+    revokeTokensForUser(user: UserModel | any, tokens?: any[], deleteInstead?: boolean): number;
     /**
      * Lists all refresh tokens for currently logged in user.
      *

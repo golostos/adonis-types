@@ -7,7 +7,7 @@ type Collection<T> = Promise<Serializer<T>>
 type Constructor<T> = { new(): T }
 type Mixed = any
 
-type ReturnTypeOfMethod<T, K extends keyof T> = ReturnType<T[K]>
+// type ReturnTypeOfMethod<T, K extends keyof T> = ReturnType<T[K]>
 
 /**
  * Lucid model is a base model and supposed to be

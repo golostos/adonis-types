@@ -1,4 +1,7 @@
 export = BaseScheme;
+type Mixed = any;
+import { UserNotFoundException, PasswordMisMatchException } from "../Exceptions/index";
+
 /**
  * The base scheme is supposed to be extend by other
  * schemes.
@@ -105,7 +108,7 @@ declare class BaseScheme<UserModel> {
      * }).attempt()
      * ```
      */
-    query(callback: Function): BaseScheme;
+    query(callback: Function): BaseScheme<UserModel>;
     /**
      * Validates the user credentials.
      *

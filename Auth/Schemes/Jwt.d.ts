@@ -1,4 +1,5 @@
 export = JwtScheme;
+import BaseTokenScheme = require("./BaseToken");
 /**
  * This scheme allows to make use of JWT tokens to authenticate the user.
  *
@@ -14,7 +15,7 @@ export = JwtScheme;
  * @class JwtScheme
  * @extends BaseScheme
  */
-declare class JwtScheme<UserModel> {
+declare class JwtScheme<UserModel> extends BaseTokenScheme<UserModel> {
     constructor(Encryption: any);
     _generateRefreshToken: any;
     /**
@@ -244,7 +245,7 @@ declare class JwtScheme<UserModel> {
      */
     check(): boolean;
     jwtPayload: any;
-    user: UserModel | null;
+    // user: UserModel | null;
     /**
      * Same as {{#crossLink "JwtScheme/check:method"}}{{/crossLink}},
      * but doesn't throw any exceptions. This method is useful for

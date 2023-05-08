@@ -1,4 +1,6 @@
-export = HasMany;
+export = HasMany; 
+import VanillaSerializer from '../Serializers/Vanilla';
+type Serializer<T> = VanillaSerializer<T>
 /**
  * HasMany relationship instance is used to define a
  * has many relation. The instance of this class
@@ -111,6 +113,16 @@ declare class HasMany<TModel extends Model> extends BaseRelation<TModel> {
      * @return {Array}
      */
     saveMany(arrayOfRelatedInstances: any[], trx?: any): Promise<any[]>;
+    /**
+     * Execute the query and setup pivot values
+     * as a relation
+     *
+     * @method fetch
+     * @async
+     *
+     * @return {Serializer}
+     */
+    fetch(): Promise<Serializer<TModel>>;
 }
 import Model = require('../Model');
 import BaseRelation = require("./BaseRelation");

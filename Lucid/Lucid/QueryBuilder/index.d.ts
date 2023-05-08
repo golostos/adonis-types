@@ -220,7 +220,7 @@ declare class QueryBuilder<TModel extends {}, TRecord extends {}> extends KnexQu
      *
      * @return {Serializer}
      */
-    paginate(page?: number, limit?: number): any;
+    paginate(page?: number, limit?: number): Promise<Serializer<TModel>>;
     /**
      * Execute insert query
      *
